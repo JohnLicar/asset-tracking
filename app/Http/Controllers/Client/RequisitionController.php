@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Client;
 use App\Models\Requisition;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RequestisitonRequest;
 use App\Models\Inventory;
+use App\Models\RequisitionItem;
 
 class RequisitionController extends Controller
 {
@@ -45,9 +47,16 @@ class RequisitionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestisitonRequest $request)
     {
-        Requisition::create($request->all());
+        $request_id =  Requisition::create($request->all());
+        foreach ($request->items as $item) {
+            RequisitionItem::create([
+                'requisition_id' => $request_id->id,
+                'inventory_id' => $item['inventory_id'],
+                'quantity' => $item['quantity']
+            ]);
+        }
         return redirect()->route('dashboard');
     }
 
@@ -60,13 +69,13 @@ class RequisitionController extends Controller
     public function toBeReturn()
     {
         $items = Requisition::with(['unit', 'requested', 'approved'])
-        ->where('status', 2)
-        ->paginate(10);
-        
+            ->where('status', 2)
+            ->paginate(10);
+
         return view('client.requisition.to_be_return', compact('items'));
     }
 
-      /**
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

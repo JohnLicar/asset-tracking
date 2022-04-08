@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Requisition extends Model 
+class Requisition extends Model
 {
     use HasFactory, Notifiable;
 
@@ -15,7 +15,7 @@ class Requisition extends Model
     const STATUS_DECLINE = 3;
     const STATUS_TO_RETURN = 4;
 
-     /**
+    /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
@@ -27,8 +27,7 @@ class Requisition extends Model
     protected $table = 'requisition';
 
     protected $fillable = [
-        'inventory_id',
-        'quantity',
+
         'remarks',
         'devision',
         'office',
@@ -41,15 +40,18 @@ class Requisition extends Model
         'status',
     ];
 
-    public function unit(){
-        return $this->belongsTo(Inventory::class, 'inventory_id');
+    public function unit()
+    {
+        return $this->hasMany(RequisitionItem::class, 'requisition_id');
     }
 
-    public function requested(){
+    public function requested()
+    {
         return $this->belongsTo(User::class, 'requested_by');
     }
 
-    public function approved(){
+    public function approved()
+    {
         return $this->belongsTo(User::class, 'approved_by');
     }
 

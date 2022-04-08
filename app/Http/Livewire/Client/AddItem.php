@@ -9,12 +9,17 @@ class AddItem extends Component
 {
 
     public $items = [];
-    public $item = [];
     public $inventories = [];
 
     public function mount(Inventory $item)
     {
-        $this->item = $item;
+        $this->items = [
+            [
+            'unit' => $item->unit,
+            'inventory_id' => $item->id,
+            'quantity' => $item->quantity
+            ]
+        ];
         $this->inventories = Inventory::all();
 
         // dd($this->items);
@@ -28,13 +33,22 @@ class AddItem extends Component
     public function addItem()
     {
         $this->items[] = [ 'inventory_id' => '', 'quantity' => '' ];
-        // dd($this->items);
+    }
+
+     /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function removeItem($index)
+    {
+        unset($this->items[$index]);
+        $this->items = array_values($this->items);
     }
 
 
     public function render()
     {
-        // info($this->items);
         return view('livewire.client.add-item');
     }
 
