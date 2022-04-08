@@ -29,6 +29,7 @@ class ItemRequest extends FormRequest
             'amount' => 'required|integer',
             'description' => 'required|min:2|max:255',
             'life_span' => 'required|min:2|max:255',
+            'isConsumable' => 'required|boolean'
         ];
     }
 }

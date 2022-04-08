@@ -12,9 +12,6 @@
         <div class="p-3 bg-white border-b border-gray-200">
 
           <div>
-            <x-slot name="header">
-              {{ __('Approved Requisition') }}
-            </x-slot>
 
             <div class=" bg-white rounded-lg shadow-xs">
               <div class=" flex justify-between space-x-4 mb-3">
@@ -36,11 +33,11 @@
                         <th class="px-4 py-3">Requested by</th>
                         <th class="px-4 py-3">Approved by</th>
                         <th class="px-4 py-3">Purpose</th>
-                        <th class="px-4 py-3 text-center">Action</th>
+
                       </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                      @foreach($items as $index => $item)
+                      @foreach($requisitions as $index => $item)
                       <tr class="text-gray-700">
 
                         <td class="px-4 py-3 text-sm">
@@ -75,22 +72,7 @@
                           {{ $item->approved?->full_name }}
                         </td>
 
-                        <td class="flex  px-4 py-3 text-sm">
 
-                          @if ($item->unit->isConsumable)
-                          <a href="#" class="text-red-600 hover:text-red-900 mt-3">
-                            <form action="{{ route('returnItem', $item) }}" method="POST">
-                              @csrf
-                              @method('PUT')
-                              <button type="submit" onclick="return confirm('Are you sure?')" class="w-4 h-4">
-                                <i class="gg-folder-remove"></i>
-                              </button>
-                            </form>
-
-                          </a>
-
-                          @endif
-                        </td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -98,7 +80,7 @@
                 </div>
                 <div
                   class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
-                  {{ $items->links() }}
+                  {{ $requisitions->links() }}
                 </div>
               </div>
 

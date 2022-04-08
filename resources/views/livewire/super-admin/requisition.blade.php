@@ -89,6 +89,7 @@
                             </td>
 
 
+                            @if ($item->status == 1)
                             <td class="flex  px-4 py-3 text-sm">
                                 <button class="mt-2 mr-5 text-green-600 hover:text-green-900"
                                     wire:click='$emit("openModal", "approve-modal", {{ json_encode(["requisition" => $item->id]) }})'>
@@ -100,6 +101,7 @@
                                     Decline
                                 </button>
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

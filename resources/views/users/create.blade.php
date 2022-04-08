@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create New Admin') }}
+            {{ __('Create New User') }}
         </h2>
     </x-slot>
 
@@ -18,56 +18,42 @@
 
                             <div>
                                 <x-label for="name" :value="__('ID Number')" />
-                                <x-input id="idnumber" class="block mt-1 w-full" type="number" name="idnumber" :value="old('idnumber')" autofocus />
+                                <x-input id="idnumber" class="block mt-1 w-full" type="number" name="idnumber"
+                                    :value="old('idnumber')" autofocus />
                             </div>
 
                             <div>
                                 <x-label for="name" :value="__('First Name')" />
-                                <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')"/>
+                                <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
+                                    :value="old('first_name')" />
                             </div>
 
                             <div>
                                 <x-label for="middle_name" :value="__('Middle Name')" />
-                                <x-input id="middle_name" class="block mt-1 w-full" type="text" name="middle_name" :value="old('middle_name')" />
+                                <x-input id="middle_name" class="block mt-1 w-full" type="text" name="middle_name"
+                                    :value="old('middle_name')" />
                             </div>
 
                             <div>
                                 <x-label for="last_name" :value="__('Last Name')" />
-                                <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" />
+                                <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
+                                    :value="old('last_name')" />
                             </div>
 
                             <div>
                                 <x-label for="email" :value="__('Email')" />
-                                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" />
+                                <x-input id="email" class="block mt-1 w-full" type="email" name="email"
+                                    :value="old('email')" />
                             </div>
 
                             <div>
                                 <x-label for="contact_number" :value="__('Contact Number')" />
-                                <x-input id="contact_number" class="block mt-1 w-full" type="text" name="contact_number" :value="old('contact_number')" />
+                                <x-input id="contact_number" class="block mt-1 w-full" type="text" name="contact_number"
+                                    :value="old('contact_number')" />
                             </div>
 
-                            <div>
-                                <x-label for="role" :value="__('Role')" />
-
-                                <div class="form-check">
-                                    <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" value="client" name="role" id="role">
-                                    <label class="form-check-label inline-block text-gray-800" for="role">
-                                     Client
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" value="administrator" name="role" id="role">
-                                    <label class="form-check-label inline-block text-gray-800" for="role">
-                                     Admin
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div >
-                                <x-label for="avatar" :value="__('Image')" />
-                                <x-input id="avatar" class="block mt-1 w-full" type="file" name="avatar" :value="old('avatar')" />
-                            </div>
                         </div>
+                        @livewire('super-admin.create-position')
 
                         <div class="flex items-center justify-end mt-4">
                             <x-back-button href="{{ route('users.index') }}" class="ml-3">

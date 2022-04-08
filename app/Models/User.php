@@ -28,6 +28,7 @@ class User extends Authenticatable
         'email',
         'contact_number',
         'password',
+        'position_id',
         'avatar',
     ];
 
@@ -57,6 +58,10 @@ class User extends Authenticatable
             $this->first_name,
             $this->last_name
         );
+    }
+
+    public function position(){
+        return $this->belongsTo(Position::class);
     }
 
 

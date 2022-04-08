@@ -15,8 +15,6 @@ class CreateRequisitionTable extends Migration
     {
         Schema::create('requisition', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('inventory_id')->constrained('inventory');
-            $table->integer('quantity');
             $table->string('remarks')->nullable();
             $table->string('devision');
             $table->string('office');
@@ -26,6 +24,7 @@ class CreateRequisitionTable extends Migration
             $table->foreignId('approved_by')->nullable()->constrained('users');
             $table->foreignId('issued_by')->nullable()->constrained('users');
             $table->foreignId('received_by')->nullable()->constrained('users');
+            // $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

@@ -22,6 +22,7 @@
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Contact Number</th>
+                            <th class="px-4 py-3">Position</th>
                             <th class="px-4 py-3">Role</th>
                             <th class="px-4 py-3">Action</th>
                         </tr>
@@ -36,7 +37,7 @@
                                         <img src="{{asset('images/profile/'.$user->avatar)}}" alt="User Picture"
                                             class="h-10 w-10 rounded-full">
                                         @else
-                                        <img src="https://ui-avatars.com/api/?name={{ auth()->user()->full_name }}"
+                                        <img src="https://ui-avatars.com/api/?name={{ $user->full_name }}"
                                             class="mx-2 h-10 w-10 rounded-full" />
                                         @endif
                                     </div>
@@ -54,6 +55,10 @@
 
                             <td class="px-4 py-3 text-sm">
                                 {{ $user->contact_number }}
+                            </td>
+
+                            <td class="px-4 py-3 text-sm">
+                                {{ $user->position?->description }}
                             </td>
 
                             <td class="px-4 py-3 text-sm">

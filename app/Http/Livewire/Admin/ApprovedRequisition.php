@@ -11,7 +11,7 @@ class ApprovedRequisition extends Component
     {
         $requisitions = Requisition::with(['unit', 'requested', 'approved'])
         ->where('status', 2)
-        ->paginate(10);
+            ->paginate(10);
 
         return view('livewire.admin.approved-requisition', compact('requisitions'));
     }

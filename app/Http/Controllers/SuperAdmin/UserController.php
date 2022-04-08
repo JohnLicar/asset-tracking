@@ -5,7 +5,9 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UserRequest;
+use App\Models\Position;
 use App\Models\User;
+use App\Notifications\WelcomeNotification;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -18,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles')->where('id', '!=', auth()->id())
+        $users = User::with('roles', 'position')->where('id', '!=', auth()->id())
             ->paginate(7);
         return view('users.index', compact('users'));
     }
@@ -30,6 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
+
         return view('users.create');
     }
 
@@ -49,6 +52,15 @@ class UserController extends Controller
         }
         $request->role == 'administrator' ? $user->attachRole('administrator') : $user->attachRole('client');
         toast('User Created successfully', 'success');
+
+        $welcomeMessage = [
+            'body' => 'Good Day <strong>' . $user->full_name . '</strong> <br> This email is to inform you that you have already been registered on the <strong> GREGORIO CATENZA NATIONAL HIGHSCHOOL Asset Tracking System!</strong> <br><br> Please change your password after your first login',
+
+            'thankyou' => 'Thank you for using GREGORIO CATENZA NATIONAL HIGHSCHOOL Asset Tracking System',
+        ];
+        
+        $user->notify(new WelcomeNotification($welcomeMessage));
+
         return redirect()->route('users.index');
     }
 

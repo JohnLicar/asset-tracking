@@ -31,5 +31,6 @@ class Inventory extends Model
         'description',
         'life_span',
         'status',
+        'isConsumable'
     ];
 }

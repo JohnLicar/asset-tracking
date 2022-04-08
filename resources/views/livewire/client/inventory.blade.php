@@ -5,12 +5,7 @@
 
     <div class=" bg-white rounded-lg shadow-xs">
         <div class=" flex justify-between space-x-4 mb-3">
-            <a href="{{ route('inventory.create') }}">
-                <x-button class="flex">
-                    <i class="gg-add-r mr-2"></i>
-                    {{ __('Add Item') }}
-                </x-button>
-            </a>
+
             <x-input wire:model.debounce.300ms="search" id="search" class=" right-0 w-1/3" type="search" name="search"
                 placeholder="Search Item" :value="old('search')" />
         </div>

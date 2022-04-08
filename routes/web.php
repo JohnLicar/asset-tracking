@@ -3,6 +3,8 @@
 use App\Http\Controllers\SuperAdmin\UserController;
 use App\Http\Controllers\Admin\AdminDashboard;
 use App\Http\Controllers\Admin\ApprovedRequisitionController;
+use App\Http\Controllers\Admin\BorrowedItemController;
+use App\Http\Controllers\Admin\DeclineRequisitionController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Client\ClientDashboard;
 use App\Http\Controllers\RedirectUserController;
@@ -48,6 +50,8 @@ Route::middleware('auth')->group(function () {
         Route::get('returned-items', [RequisitionController::class, 'approveReturn'])->name('admin-return');
         Route::delete('returned-items/{requisition}', [RequisitionController::class, 'destroy'])->name('delete-approved-return');
         Route::resource('approved-requisition', ApprovedRequisitionController::class);
+        Route::get('borrowed-requisition', BorrowedItemController::class)->name('borrowed-item');
+        Route::get('decline-requisition', DeclineRequisitionController::class)->name('declined-requisition');
         
     });
 

@@ -26,20 +26,12 @@
                 <x-input id="office" class="block mt-1 w-full" type="text" name="office" :value="old('office')" />
               </div>
 
-              <div>
-                <x-label for="name" :value="__('Unit Name')" />
-                <x-input id="unit" class="block mt-1 w-full" type="text" name="unit" value="{{ $item->unit }}"
-                  disabled />
-                <x-input id="inventory_id" class="block mt-1 w-full" type="hidden" name="inventory_id"
-                  value="{{ $item->id }}" />
-              </div>
 
-              <div>
-                <x-label for="quantity" :value="__('Quantity')" />
-                <x-input id="quantity" class="block mt-1 w-full" type="number" name="quantity"
-                  placeholder="Available {{ $item->quantity }} quantity" :value="old('quantity')" />
-              </div>
 
+            </div>
+            @livewire('client.add-item', ['item' => $item])
+
+            <div class="grid grid-cols-2 gap-6">
               <div class="col-span-full">
                 <x-label for="purpose" :value="__('Purpose')" />
                 <textarea cols="42" rows="5" id="purpose"

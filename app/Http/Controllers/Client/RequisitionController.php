@@ -62,7 +62,7 @@ class RequisitionController extends Controller
         $items = Requisition::with(['unit', 'requested', 'approved'])
         ->where('status', 2)
         ->paginate(10);
-
+        
         return view('client.requisition.to_be_return', compact('items'));
     }
 

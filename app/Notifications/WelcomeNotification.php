@@ -9,19 +9,21 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\HtmlString;
 
 
-class ApproveRequestNotification extends Notification implements ShouldQueue
+class WelcomeNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-    private $clientData;
+    private $welcomeMessage;
+
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($clientData)
+    public function __construct($welcomeMessage)
     {
-        $this->clientData = $clientData;
+        $this->welcomeMessage = $welcomeMessage;
+        
     }
 
     /**
@@ -43,10 +45,9 @@ class ApproveRequestNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-
         return (new MailMessage)
-        ->line(new HtmlString($this->clientData['body']))
-        ->line($this->clientData['thankyou']);
+        ->line(new HtmlString($this->welcomeMessage['body']))
+        ->line($this->welcomeMessage['thankyou']);
     }
 
     /**
