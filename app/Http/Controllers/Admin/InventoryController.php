@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemRequest;
 use App\Models\Inventory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Str;
 
 class InventoryController extends Controller
 {
@@ -38,6 +41,13 @@ class InventoryController extends Controller
      */
     public function store(ItemRequest $request)
     {
+
+        $prefix = Str::upper(Str::substr(Carbon::now()->format('F'), 0, 3));
+        $inventory_number = IdGenerator::generate(['table' => 'inventory', 'field' => 'inventory_number', 'length' => 6, 'prefix' => $prefix]);
+        $request->request->add([
+            'inventory_number' => $inventory_number
+        ]);
+
         Inventory::create($request->validated());
         toast('Item added successfully', 'success');
         return redirect()->route('inventory.index');
@@ -77,7 +87,6 @@ class InventoryController extends Controller
         $inventory->update($request->validated());
         toast('Item updated successfully', 'success');
         return redirect()->route('inventory.index');
-
     }
 
     /**

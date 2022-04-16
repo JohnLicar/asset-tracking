@@ -22,6 +22,7 @@ class AdminSeeder extends Seeder
         $admin->first_name = 'Remetilla';
         $admin->email = 'uarymel@gmail.com';
         $admin->contact_number = '09303203009';
+        $admin->position_id = 4;
         $admin->password = Hash::make('password');
         $admin->save();
         $admin->attachRole('superadministrator');

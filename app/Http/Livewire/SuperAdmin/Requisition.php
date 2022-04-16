@@ -16,8 +16,7 @@ class Requisition extends Component
     {
 
         $requisitions = ModelsRequisition::search($this->search, $this->status)
-            ->with(['unit'])
-            ->where('status', '!=', ModelsRequisition::STATUS_TO_RETURN)
+            ->with('request.unit')
             ->orderBy('status')
             ->paginate(6);
 

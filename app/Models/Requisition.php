@@ -24,6 +24,14 @@ class Requisition extends Model
         'quantity' => 'integer',
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'approved_date',
+        'issued_date'
+    ];
+
+
     protected $table = 'requisition';
 
     protected $fillable = [
@@ -38,11 +46,20 @@ class Requisition extends Model
         'issued_by',
         'received_by',
         'status',
+        'approved_date',
+        'issued_date',
     ];
+
+    public function request()
+    {
+        return $this->hasMany(RequisitionItem::class, 'requisition_id');
+    }
 
     public function unit()
     {
-        return $this->hasMany(RequisitionItem::class, 'requisition_id');
+        return $this->belongsToMany(Inventory::class, 'requisition_item')
+            ->withPivot('quantity')
+            ->where('isConsumable', 1);
     }
 
     public function requested()

@@ -24,7 +24,7 @@ class CreateRequisitionTable extends Migration
             $table->foreignId('approved_by')->nullable()->constrained('users');
             $table->foreignId('issued_by')->nullable()->constrained('users');
             $table->foreignId('received_by')->nullable()->constrained('users');
-            $table->boolean('status')->default(1);
+
             $table->timestamps();
         });
     }

@@ -17,7 +17,6 @@
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
                             <th class="px-4 py-3">Quantity</th>
                             <th class="px-4 py-3">Unit (Name of Item)</th>
-                            <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Devision</th>
                             <th class="px-4 py-3">Office</th>
                             <th class="px-4 py-3">Requested by</th>
@@ -31,16 +30,26 @@
                         <tr class="text-gray-700">
 
                             <td class="px-4 py-3 text-sm">
-                                {{ $item->quantity }}
+                                @foreach ($item->request as $request)
+                                <ol class="list-decimal">
+                                    <li>
+                                        {{ $request->quantity }}
+                                    </li>
+                                </ol>
+                                @endforeach
+
+
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                @foreach ($item->request as $request)
+                                <ol class="list-decimal">
+                                    <li>
+                                        {{ $request->unit->unit }}
+                                    </li>
+                                </ol>
+                                @endforeach
                             </td>
 
-                            <td class="px-4 py-3 text-sm">
-                                {{ $item->unit->unit }}
-                            </td>
-
-                            <td class="px-4 py-3 text-sm">
-                                {{ $item->unit->description }}
-                            </td>
 
                             <td class="px-4 py-3 text-sm">
                                 {{ $item->purpose }}
@@ -62,9 +71,9 @@
                                 {{ $item->approved?->full_name }}
                             </td>
 
-                            <td class="flex  px-4 py-3 text-sm">
+                            <td class="text-center px-4 py-3 text-sm">
                                 <a target="_blank" href="{{ route('approved-requisition.create') }}"
-                                    class="text-indigo-600 hover:text-indigo-900">
+                                    class="text-indigo-600 hover:text-indigo-900 align-middle">
                                     <i class="gg-printer"></i>
 
                                 </a>

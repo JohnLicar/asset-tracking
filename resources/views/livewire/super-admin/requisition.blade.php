@@ -28,7 +28,7 @@
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
                             <th class="px-4 py-3">Quantity</th>
                             <th class="px-4 py-3">Unit (Name of Item)</th>
-                            <th class="px-4 py-3">Description</th>
+                            {{-- <th class="px-4 py-3">Description</th> --}}
                             <th class="px-4 py-3">Devision</th>
                             <th class="px-4 py-3">Office</th>
                             <th class="px-4 py-3">Purpose</th>
@@ -40,18 +40,27 @@
                         @foreach($requisitions as $index => $item)
                         <tr class="text-gray-700">
 
-                            <td class="px-4 py-3 text-sm">
-                                {{ $item->quantity }}
-                            </td>
 
                             <td class="px-4 py-3 text-sm">
-                                {{ $item->unit->unit }}
-                            </td>
+                                @foreach ($item->request as $request)
+                                <ol class="list-decimal">
+                                    <li>
+                                        {{ $request->quantity }}
+                                    </li>
+                                </ol>
+                                @endforeach
 
+
+                            </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $item->unit->description }}
+                                @foreach ($item->request as $request)
+                                <ol class="list-decimal">
+                                    <li>
+                                        {{ $request->unit->unit }}
+                                    </li>
+                                </ol>
+                                @endforeach
                             </td>
-
                             <td class="px-4 py-3 text-sm">
                                 {{ $item->devision }}
                             </td>

@@ -68,9 +68,12 @@ class RequisitionController extends Controller
      */
     public function toBeReturn()
     {
+
         $items = Requisition::with(['unit', 'requested', 'approved'])
-            ->where('status', 2)
+            ->whereRelation('unit', 'isConsumable', 1)
+            ->whereIn('status', [2, 4])
             ->paginate(10);
+        // dd($items);
 
         return view('client.requisition.to_be_return', compact('items'));
     }
@@ -99,11 +102,21 @@ class RequisitionController extends Controller
      */
     public function destroy(Requisition $requisition)
     {
-        $item = Inventory::find($requisition->inventory_id);
+        $items = RequisitionItem::with('requester', 'unit', 'requesition.approved')->inventory($requisition->id)
+            ->whereRelation('unit', 'isConsumable', 1)
+            ->get();
 
-        $item->update([
-            'quantity' => ($item->quantity + $requisition->quantity)
-        ]);
+        foreach ($items as $item) {
+            $item->unit->update([
+                'quantity' => ($item->unit->quantity + $item->quantity)
+            ]);
+        }
+
+        // $item = Inventory::find($requisition->inventory_id);
+
+        // $item->update([
+        //     'quantity' => ($item->quantity + $requisition->quantity)
+        // ]);
 
         $requisition->delete();
         toast('Item returned successfully', 'success');

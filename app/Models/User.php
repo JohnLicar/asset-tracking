@@ -30,6 +30,7 @@ class User extends Authenticatable
         'password',
         'position_id',
         'avatar',
+        'signature',
     ];
 
     /**
@@ -60,7 +61,8 @@ class User extends Authenticatable
         );
     }
 
-    public function position(){
+    public function position()
+    {
         return $this->belongsTo(Position::class);
     }
 

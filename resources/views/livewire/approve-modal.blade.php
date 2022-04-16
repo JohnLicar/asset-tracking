@@ -5,12 +5,12 @@
                 Request for Approval
             </h3>
 
-            <div>
+            {{-- <div>
                 <x-label for="quantity" :value="__('Quantity')" />
                 <x-input id="quantity" class="block mt-1 w-full" type="number" name="quantity" wire:model='quantity'
                     placeholder="Request {{ $item->quantity }} quantity" :value="old('quantity')" />
                 @error('quantity') <span class="text-red-900">{{ $message }}</span> @enderror
-            </div>
+            </div> --}}
             <div class="mt-2 w-full">
                 <x-label for="remark" :value="__('Remark')" />
                 <textarea cols="42" rows="3" id="remarks" wire:model='remarks'

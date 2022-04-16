@@ -19,9 +19,10 @@
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
                             <th class="px-4 py-3">Quantity</th>
                             <th class="px-4 py-3">Unit (Name of Item)</th>
-                            <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Devision</th>
                             <th class="px-4 py-3">Office</th>
+                            <th class="px-4 py-3">Requested by</th>
+                            <th class="px-4 py-3">Approved by</th>
                             <th class="px-4 py-3">Purpose</th>
                             <th class="px-4 py-3 text-center">Action</th>
                         </tr>
@@ -31,15 +32,29 @@
                         <tr class="text-gray-700">
 
                             <td class="px-4 py-3 text-sm">
-                                {{ $item->quantity }}
+                                @foreach ($item->request as $request)
+                                <ol class="list-decimal">
+                                    <li>
+                                        {{ $request->quantity }}
+                                    </li>
+                                </ol>
+                                @endforeach
+
+
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                @foreach ($item->request as $request)
+                                <ol class="list-decimal">
+                                    <li>
+                                        {{ $request->unit->unit }}
+                                    </li>
+                                </ol>
+                                @endforeach
                             </td>
 
-                            <td class="px-4 py-3 text-sm">
-                                {{ $item->unit->unit }}
-                            </td>
 
                             <td class="px-4 py-3 text-sm">
-                                {{ $item->unit->description }}
+                                {{ $item->purpose }}
                             </td>
 
                             <td class="px-4 py-3 text-sm">
@@ -51,7 +66,11 @@
                             </td>
 
                             <td class="px-4 py-3 text-sm">
-                                {{ $item->purpose }}
+                                {{ $item->requested->full_name }}
+                            </td>
+
+                            <td class="px-4 py-3 text-sm">
+                                {{ $item->approved?->full_name }}
                             </td>
 
                             <td class="flex  px-4 py-3 text-center text-sm">

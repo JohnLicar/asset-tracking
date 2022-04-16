@@ -14,6 +14,7 @@ class ProfileController extends Controller
 
     public function update(ProfileUpdateRequest $request)
     {
+
         if ($request->password) {
             auth()->user()->update(['password' => Hash::make($request->password)]);
         }
@@ -22,6 +23,14 @@ class ProfileController extends Controller
             'name' => $request->name,
             'email' => $request->email,
         ]);
+
+        if ($request->hasFile('signature')) {
+            $signature =  auth()->id() . '-' .   auth()->user()->first_name . '-' .   auth()->user()->last_name . '.' . $request->signature->getClientOriginalExtension();
+            $request->signature->move(public_path('images/signatures'), $signature);
+            auth()->user()->update(['signature' =>  $signature]);
+        }
+
+
 
         return redirect()->back()->with('success', 'Profile updated.');
     }

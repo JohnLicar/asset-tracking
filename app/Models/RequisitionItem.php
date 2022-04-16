@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class RequisitionItem extends Model
 {
     use HasFactory;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
 
     protected $fillable = [
         'requisition_id',
@@ -21,6 +23,18 @@ class RequisitionItem extends Model
         'quantity' => 'integer',
     ];
 
+    public function requester()
+    {
+        return $this->belongsToThrough(
+            User::class,
+            Requisition::class,
+            null,
+            '',
+            [User::class => 'requested_by']
+        );
+    }
+
+
     public function requesition()
     {
         return $this->belongsTo(Requisition::class, 'requisition_id');
@@ -29,5 +43,10 @@ class RequisitionItem extends Model
     public function unit()
     {
         return $this->belongsTo(Inventory::class, 'inventory_id');
+    }
+
+    public function scopeInventory($query, $item)
+    {
+        return $query->where('requisition_id', $item);
     }
 }

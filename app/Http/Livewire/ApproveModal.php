@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Inventory;
 use App\Models\Requisition;
+use App\Models\RequisitionItem;
 use App\Models\User;
 use App\Notifications\ApproveRequestNotification;
 use LivewireUI\Modal\ModalComponent;
@@ -11,71 +12,57 @@ use LivewireUI\Modal\ModalComponent;
 class ApproveModal extends ModalComponent
 {
 
-    public $item;
+    public  $items;
     public $remarks;
-    public $quantity;
 
-    public function mount(Requisition $requisition)
+    public function mount($requisition)
     {
-        $this->item = $requisition; 
+        $this->items = RequisitionItem::with('requester', 'unit', 'requesition.approved')->inventory($requisition)->get();
     }
-    
+
     public function render()
     {
         return view('livewire.approve-modal');
     }
 
     protected $rules = [
-        'quantity' => 'required|min:1|integer',
         'remarks' => 'required',
     ];
 
     public function approve()
     {
-       
-        $user = User::where('id', $this->item->requested_by)->firstOrFail();
-
-        $item = Inventory::find($this->item->inventory_id);
-
         $this->validate();
 
-        if ($item->quantity < $this->quantity) {
-            toast('Available quantity wont be enough', 'danger');
-            return redirect()->route('requisitions.index');
+        foreach ($this->items as $item) {
+            $item->unit->update([
+                'quantity' => ($item->unit->quantity - $item->quantity)
+            ]);
         }
 
-        $item->update([
-            'quantity' => ($item->quantity - $this->quantity)
-        ]);
-
-        $this->item->load('unit', 'approved')->update([
+        $this->items[0]->requesition->update([
             'status' => 2,
             'approved_by' => auth()->id(),
             'remarks' => $this->remarks,
+            'approved_date' => now(),
+
         ]);
-       
-       
-       $approver = Requisition::with('approved')
-       ->where('id', $this->item->id)->first();
- 
-       
+
         $clientData = [
-            'body' => 'Good Day <strong>' . $user->full_name . '</strong> GREGORIO CATENZA NATIONAL HIGHSCHOOL Asset Tracking System!
-            Your request of <strong>'. $this->item->unit->unit .'</strong> was approved by <strong>'.  $approver->approved->full_name .'</strong>',
+            'body' => 'Good Day <strong>' . $this->items[0]->requester->full_name . '</strong> GREGORIO CATENZA NATIONAL HIGHSCHOOL Asset Tracking System!
+            Your request for <strong>  <br> ' . $this->items[0]->requesition->purpose  . '</strong> was approved by <strong>' .  $this->items[0]->requesition->full_name . '</strong>',
 
             'thankyou' => 'Thank you for using GREGORIO CATENZA NATIONAL HIGHSCHOOL Asset Tracking System',
         ];
-        
-        $user->notify(new ApproveRequestNotification($clientData));
+
+        $this->items[0]->requester->notify(new ApproveRequestNotification($clientData));
 
         $this->closeModal();
         toast('Request Approved successfully', 'success');
         return redirect()->route('requisitions.index');
     }
 
-   
-
-    public function closeApproveModal(){
+    public function closeApproveModal()
+    {
         $this->closeModal();
     }
 }

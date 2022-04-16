@@ -30,12 +30,11 @@
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
                         <th class="px-4 py-3">Quantity</th>
                         <th class="px-4 py-3">Unit (Name of Item)</th>
-                        <th class="px-4 py-3">Description</th>
                         <th class="px-4 py-3">Devision</th>
                         <th class="px-4 py-3">Office</th>
-                        <th class="px-4 py-3">Requested by</th>
                         <th class="px-4 py-3">Approved by</th>
                         <th class="px-4 py-3">Purpose</th>
+                        <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3 text-center">Action</th>
                       </tr>
                     </thead>
@@ -44,19 +43,24 @@
                       <tr class="text-gray-700">
 
                         <td class="px-4 py-3 text-sm">
-                          {{ $item->quantity }}
-                        </td>
+                          @foreach ($item->unit as $request)
+                          <ol class="list-decimal">
+                            <li>
+                              {{ $request->pivot->quantity }}
+                            </li>
+                          </ol>
+                          @endforeach
 
-                        <td class="px-4 py-3 text-sm">
-                          {{ $item->unit->unit }}
-                        </td>
 
-                        <td class="px-4 py-3 text-sm">
-                          {{ $item->unit->description }}
                         </td>
-
                         <td class="px-4 py-3 text-sm">
-                          {{ $item->purpose }}
+                          @foreach ($item->unit as $request)
+                          <ol class="list-decimal">
+                            <li>
+                              {{ $request->unit }}
+                            </li>
+                          </ol>
+                          @endforeach
                         </td>
 
                         <td class="px-4 py-3 text-sm">
@@ -75,9 +79,38 @@
                           {{ $item->approved?->full_name }}
                         </td>
 
+                        <td class="px-4 py-3 text-sm">
+                          {{ $item->purpose }}
+                        </td>
+
+                        <td class="px-4 py-3 text-sm">
+                          @if($item->status == 1)
+                          <span
+                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-500 text-white">
+                            Pending
+                          </span>
+                          @elseif ($item->status == 2)
+                          <span
+                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-500 text-white">
+                            Approved
+                          </span>
+                          @elseif ($item->status == 3)
+                          <span
+                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-500 text-white">
+                            Declined
+                          </span>
+                          @elseif ($item->status == 4)
+                          <span
+                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-500 text-white">
+                            Returning
+                          </span>
+                          @endif
+                        </td>
+
+
                         <td class="flex  px-4 py-3 text-sm">
 
-                          @if ($item->unit->isConsumable)
+                          @if ($item->status != $item::STATUS_TO_RETURN)
                           <a href="#" class="text-red-600 hover:text-red-900 mt-3">
                             <form action="{{ route('returnItem', $item) }}" method="POST">
                               @csrf
