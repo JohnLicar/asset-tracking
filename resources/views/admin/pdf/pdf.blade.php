@@ -50,7 +50,7 @@
     }
 
 
-    img {
+    .img {
       width: 50px;
       display: block;
     }
@@ -60,8 +60,26 @@
       font-weight: bold;
     }
 
+    .txt-normal {
+      font-weight: normal;
+    }
+
     .page_break {
       page-break-after: always;
+    }
+
+    /* Centered text */
+    .centered {
+      position: absolute;
+      top: 48%;
+      left: 25%;
+      transform: translate(-50%, -50%);
+    }
+
+    .container {
+      position: relative;
+      text-align: center;
+      color: white;
     }
   </style>
 </head>
@@ -329,10 +347,10 @@
 
       <tr>
         <td colspan="1">Signature</td>
-        <td colspan="1" class="center"> <img src="{{ $image[0] }}" alt="Signature">
+        <td colspan="1" class="center"> <img src="{{ $image[0] }}" alt="Signature" class="img">
         </td>
-        <td colspan="2" class="center"> <img src="{{ $image[1] }}" alt="Signature"></td>
-        <td colspan="2" class="center"> <img src="{{ $image[2] }}" alt="Signature"></td>
+        <td colspan="2" class="center"> <img src="{{ $image[1] }}" alt="Signature" class="img"></td>
+        <td colspan="2" class="center"> <img src="{{ $image[2] }}" alt="Signature" class="img"></td>
         <td colspan="2"></td>
       </tr>
       <tr>
@@ -355,131 +373,120 @@
         </td>
         <td colspan="2" class="center">{{ $requisitions[0]->requesition->approved_date->toFormatedDate() }}
         </td>
-        <td colspan="2" class="center">{{ $requisitions[0]->requesition->approved_date->toFormatedDate() }}</td>
+        <td colspan="2" class="center">{{ now()->toFormatedDate() }}</td>
         <td colspan="2"></td>
       </tr>
     </tbody>
   </table>
 
-  {{-- <div class="page_break"></div>
+  <div class="page_break"></div>
 
+  <div class="right">
+    <p><i>Appendix 59</i></p>
+  </div>
   <div class="center">
-    <h3>PROPERTY ACKNOWLEDGEMENT RECIEPT</h3>
+    <h3>INVENTORY CUSTODIAN SLIP</h3>
   </div>
 
+  <div>
+    <p class="txt-bold">Entity Name : Gregorio Catenza National High
+      School&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Fund Cluster :
+      ____________________</p>
+  </div>
+
+
   <table cellpadding="0" cellspacing="0">
-    <colgroup>
-      <col />
-    </colgroup>
-    {{-- <thead>
 
-      <tr>
-        <th colspan="8" class="left">
-          <p>Devision: {{ $requisitions[0]->devision }}</p>
-          <p>Office: {{ $requisitions[0]->office }}</p>
-        </th>
-      </tr>
 
-      <tr class="table-header">
-        <th colspan="4">Requisition</th>
-        <th colspan="2">Stock Available?</th>
-        <th colspan="2">Issue</th>
-      </tr>
+    <tr>
+      <th rowspan="2">Quantity</th>
+      <th rowspan="2">Unit</th>
+      <th colspan="2">Amount</th>
+      <th rowspan="2">Description</th>
+      <th rowspan="2">Inventory Item No.</th>
+      <th rowspan="2">Estimated Useful Life</th>
+    </tr>
 
-    </thead>
-    <tbody>
-      <tr>
-        <th>Quantity</th>
-        <th>Unit</th>
-        <th>Description</th>
-        <th>Property Number</th>
-        <th>Date Acquired</th>
-        <th>Amount</th>
-      </tr>
-    </tbody>
+    <tr>
+      <th class="txt-normal">Unit Cost</th>
+      <th class="txt-normal">Total Cost</th>
+    </tr>
+
     <tbody>
 
       @foreach ($requisitions as $requisition)
       <tr>
-        <td class="center">{{ $requisition->inventory_id }}</td>
-        <td class="center">{{ $requisition->unit->unit }}</td>
-        <td class="center">{{ $requisition->unit->description }}</td>
         <td class="center">{{ $requisition->quantity }}</td>
-        <td class="center">{{ $requisition->status }}</td>
-        <td class="center">{{ $requisition->available }}</td>
-
+        <td class="center">{{ $requisition->unit->unit }}</td>
+        <td class="center">{{ $requisition->unit->amount }}</td>
+        <td class="center">{{ $requisition->unit->amount * $requisition->quantity}}</td>
+        <td class="center">{{ $requisition->unit->description }}</td>
+        <td class="center">APR001</td>
+        <td class="center">{{ $requisition->unit->life_span }}</td>
       </tr>
       @endforeach
 
       <tr>
-        <td> &nbsp;</td>
+        <td>&nbsp;</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
-
+        <td></td>
       </tr>
 
       <tr>
-        <td>&nbsp; </td>
+        <td>&nbsp;</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
-
+        <td></td>
       </tr>
 
       <tr>
-        <td>&nbsp; </td>
+        <td>&nbsp;</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
-
-
-      </tr>
-
-      <tr class="table-header">
-        <th colspan="1">&nbsp;</th>
-        <th colspan="1">Requested By:</th>
-        <th colspan="2">Approved By:</th>
-        <th colspan="2">Issued By:</th>
-        <th colspan="2">Recieved By:</th>
+        <td></td>
       </tr>
 
-      <tr>
-        <td colspan="1">Signature</td>
-        <td colspan="1"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-      </tr>
-      <tr>
-        <td colspan="1">Printed Name</td>
-        <td colspan="1" class="center">{{ $requisitions[0]->requested->full_name }}</td>
-        <td colspan="2" class="center">{{ $requisitions[0]->approved->full_name }}</td>
-        <td colspan="2" class="center">{{ auth()->user()->full_name }}</td>
-        <td colspan="2"></td>
-      </tr>
-      <tr>
-        <td colspan="1">Designation</td>
-        <td colspan="1"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-      </tr>
-      <tr>
-        <td colspan="1">Date</td>
-        <td colspan="1"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-      </tr>
     </tbody>
-  </table> --}}
+
+    <thead>
+      <tr>
+        <th colspan="4">
+          <div class="left">
+            Received from:
+          </div>
+          <div class="center">
+            <img class="centered" src="{{ $image[0] }}" alt="Signature" height="100" width="100">
+            <p class="txt-normal">{{ auth()->user()->full_name }} <br>
+              _______________________________<br>Signature Over Printed Name</p>
+
+            <p class="txt-normal">{{ now()->toFormatedDate()}} <br>Date</p>
+          </div>
+
+        </th>
+
+        <th colspan="3" class="text-md">
+          <div class="left">
+            Received by:
+          </div>
+          <div class="center">
+            <p>Devision: {{ $requisitions[0]->requesition->devision }}</p>
+            <p>Office: {{ $requisitions[0]->requesition->office }}</p>
+          </div>
+        </th>
+      </tr>
+    </thead>
+  </table>
 </body>
 
 </html>
