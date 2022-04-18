@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Client\ClientDashboard;
 use App\Http\Controllers\RedirectUserController;
 use App\Http\Controllers\Client\RequisitionController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\SuperAdmin\SuperAdminDashboard;
 use Illuminate\Support\Facades\Route;
 
@@ -41,7 +42,8 @@ Route::middleware('auth')->group(function () {
         Route::get('sdashboard', [SuperAdminDashboard::class, 'index'])->name('sdashboard');
         Route::resource('users', UserController::class);
         Route::resource('requisitions', RequisitionController::class)->only(['index', 'update']);
-
+        Route::get('borrowed-requisition', BorrowedItemController::class)->name('superadmin.borrowed-item');
+        Route::get('logs', LogController::class)->name('superadmin.logs');
     });
 
     Route::group(['prefix' => 'admin', 'middleware' => ['role:administrator']], function () {
@@ -49,10 +51,11 @@ Route::middleware('auth')->group(function () {
         Route::resource('inventory', InventoryController::class);
         Route::get('returned-items', [RequisitionController::class, 'approveReturn'])->name('admin-return');
         Route::delete('returned-items/{requisition}', [RequisitionController::class, 'destroy'])->name('delete-approved-return');
-        Route::resource('approved-requisition', ApprovedRequisitionController::class);
+        Route::get('approved-requisition/{requisition}', [ApprovedRequisitionController::class, 'create'])->name('approved-requisition.create');
+        Route::resource('approved-requisition', ApprovedRequisitionController::class)->except('create');
         Route::get('borrowed-requisition', BorrowedItemController::class)->name('borrowed-item');
         Route::get('decline-requisition', DeclineRequisitionController::class)->name('declined-requisition');
-        
+        Route::get('logs', LogController::class)->name('admin.logs');
     });
 
     Route::group(['prefix' => 'client', 'middleware' => ['role:client']], function () {
@@ -61,8 +64,7 @@ Route::middleware('auth')->group(function () {
         Route::get('my-approved-requisition', [ApprovedRequisitionController::class, 'approved'])->name('requisition.approved');
         Route::get('return-item', [RequisitionController::class, 'toBeReturn'])->name('toBeReturn');
         Route::put('return-item/{requisition}', [RequisitionController::class, 'updateToReturn'])->name('returnItem');
-        Route::resource('requisition', RequisitionController::class)->except('create');  
-
+        Route::resource('requisition', RequisitionController::class)->except('create');
     });
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');

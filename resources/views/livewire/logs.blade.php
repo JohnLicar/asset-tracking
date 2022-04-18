@@ -1,12 +1,14 @@
 <div>
     <x-slot name="header">
-        {{ __('Approved Requisition') }}
+        {{ __('Logs') }}
     </x-slot>
 
     <div class=" bg-white rounded-lg shadow-xs">
         <div class=" flex justify-between space-x-4 mb-3">
+
             <x-input wire:model.debounce.300ms="search" id="search" class=" right-0 w-1/3" type="search" name="search"
                 placeholder="Search Item" :value="old('search')" />
+
         </div>
 
         <div class="overflow-hidden mb-8 w-full rounded-lg border shadow-xs">
@@ -22,7 +24,7 @@
                             <th class="px-4 py-3">Requested by</th>
                             <th class="px-4 py-3">Approved by</th>
                             <th class="px-4 py-3">Purpose</th>
-                            <th class="px-4 py-3 text-center">Action</th>
+                            <th class="px-4 py-3 text-center">Date Returned</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -51,9 +53,7 @@
                             </td>
 
 
-                            <td class="px-4 py-3 text-sm">
-                                {{ $item->purpose }}
-                            </td>
+
 
                             <td class="px-4 py-3 text-sm">
                                 {{ $item->devision }}
@@ -71,15 +71,15 @@
                                 {{ $item->approved?->full_name }}
                             </td>
 
-                            <td class="text-center px-4 py-3 text-sm">
-                                <a target="_blank" href="{{ route('approved-requisition.create', $item) }}"
-                                    class="text-indigo-600 hover:text-indigo-900 align-middle">
-                                    <i class="gg-printer"></i>
-
-                                </a>
+                            <td class="px-4 py-3 text-sm">
+                                {{ $item->purpose }}
                             </td>
-                        </tr>
-                        @endforeach
+
+                            <td class="px-4 py-3 text-sm">
+                                {{ $item->deleted_at->toFormatedDate() }}
+                            </td>
+
+                            @endforeach
                     </tbody>
                 </table>
             </div>

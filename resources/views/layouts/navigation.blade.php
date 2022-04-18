@@ -48,6 +48,35 @@
                 </x-nav-link>
             </li>
 
+            <li class="relative px-6 py-3">
+                <x-nav-link href="{{ route('superadmin.borrowed-item') }}"
+                    :active="request()->routeIs('superadmin.borrowed-item')">
+                    <x-slot name="icon">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                    </x-slot>
+                    {{ __('Borrowed Item') }}
+                </x-nav-link>
+            </li>
+
+            <li class="relative px-6 py-3">
+                <x-nav-link href="{{ route('superadmin.logs') }}" :active="request()->routeIs('superadmin.logs')">
+                    <x-slot name="icon">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                    </x-slot>
+                    {{ __('Logs') }}
+                </x-nav-link>
+            </li>
+
 
 
 
@@ -168,6 +197,20 @@
                         </svg>
                     </x-slot>
                     {{ __('Borrowed Item') }}
+                </x-nav-link>
+            </li>
+
+            <li class="relative px-6 py-3">
+                <x-nav-link href="{{ route('admin.logs') }}" :active="request()->routeIs('admin.logs')">
+                    <x-slot name="icon">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                    </x-slot>
+                    {{ __('Logs') }}
                 </x-nav-link>
             </li>
             @endrole

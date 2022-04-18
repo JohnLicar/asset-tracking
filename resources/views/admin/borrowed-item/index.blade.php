@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Approved Requisition') }}
+      {{ __('Borrowed Item') }}
     </h2>
   </x-slot>
 
@@ -27,7 +27,6 @@
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
                         <th class="px-4 py-3">Quantity</th>
                         <th class="px-4 py-3">Unit (Name of Item)</th>
-                        <th class="px-4 py-3">Description</th>
                         <th class="px-4 py-3">Devision</th>
                         <th class="px-4 py-3">Office</th>
                         <th class="px-4 py-3">Requested by</th>
@@ -41,20 +40,25 @@
                       <tr class="text-gray-700">
 
                         <td class="px-4 py-3 text-sm">
-                          {{ $item->quantity }}
+                          @foreach ($item->unit as $request)
+                          <ol class="list-decimal">
+                            <li>
+                              {{ $request->pivot->quantity }}
+                            </li>
+                          </ol>
+                          @endforeach
+
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                          @foreach ($item->unit as $request)
+                          <ol class="list-decimal">
+                            <li>
+                              {{ $request->unit }}
+                            </li>
+                          </ol>
+                          @endforeach
                         </td>
 
-                        <td class="px-4 py-3 text-sm">
-                          {{ $item->unit->unit }}
-                        </td>
-
-                        <td class="px-4 py-3 text-sm">
-                          {{ $item->unit->description }}
-                        </td>
-
-                        <td class="px-4 py-3 text-sm">
-                          {{ $item->purpose }}
-                        </td>
 
                         <td class="px-4 py-3 text-sm">
                           {{ $item->devision }}
@@ -64,6 +68,7 @@
                           {{ $item->office }}
                         </td>
 
+
                         <td class="px-4 py-3 text-sm">
                           {{ $item->requested->full_name }}
                         </td>
@@ -71,6 +76,11 @@
                         <td class="px-4 py-3 text-sm">
                           {{ $item->approved?->full_name }}
                         </td>
+
+                        <td class="px-4 py-3 text-sm">
+                          {{ $item->purpose }}
+                        </td>
+
 
 
                       </tr>

@@ -25,9 +25,12 @@ class ApprovedRequisitionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Requisition $requisition)
     {
-        $requisitions = RequisitionItem::with(['requesition.approved.position', 'requesition.requested.position', 'unit'])->get();
+
+        $requisitions = RequisitionItem::with(['requesition.approved.position', 'requesition.requested.position', 'unit'])
+            ->where('requisition_id', $requisition->id)
+            ->get();
 
         $signatures =
             [

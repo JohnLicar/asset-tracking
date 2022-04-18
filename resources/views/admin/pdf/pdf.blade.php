@@ -389,10 +389,13 @@
   </div>
 
   <div>
-    <p class="txt-bold">Entity Name : Gregorio Catenza National High
-      School&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      Fund Cluster :
-      ____________________</p>
+    <div>
+      <p class="txt-bold">Entity Name : Gregorio Catenza National High School</p>
+    </div>
+
+    <p class="txt-bold">Fund Cluster : _______________________________
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      ICS No. : __________________________</p>
   </div>
 
 
@@ -467,21 +470,28 @@
           </div>
           <div class="center">
             <img class="centered" src="{{ $image[0] }}" alt="Signature" height="100" width="100">
-            <p class="txt-normal">{{ auth()->user()->full_name }} <br>
-              _______________________________<br>Signature Over Printed Name</p>
+            <p class="txt-normal">{{ auth()->user()->full_name }} <br>_______________________________<br>Signature Over
+              Printed Name</p>
+
+            <p class="txt-normal">Property Custodian<br>_______________________________<br>Position/Office
+            </p>
 
             <p class="txt-normal">{{ now()->toFormatedDate()}} <br>Date</p>
           </div>
-
         </th>
 
-        <th colspan="3" class="text-md">
+        <th colspan="3">
           <div class="left">
             Received by:
           </div>
           <div class="center">
-            <p>Devision: {{ $requisitions[0]->requesition->devision }}</p>
-            <p>Office: {{ $requisitions[0]->requesition->office }}</p>
+            <p class="txt-normal"><br>_______________________________<br>Signature Over
+              Printed Name</p>
+
+            <p class="txt-normal"><br>_______________________________<br>Position/Office
+            </p>
+
+            <p class="txt-normal">{{ now()->toFormatedDate()}} <br>Date</p>
           </div>
         </th>
       </tr>

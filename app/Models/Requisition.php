@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class Requisition extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     const STATUS_PENDING = 1;
     const STATUS_APRROVE = 2;
@@ -80,7 +81,12 @@ class Requisition extends Model
         }
 
         return empty($search) ? static::query()
-            : static::query()->where('office', 'like', '%' . $search . '%');
+            : static::query()->where('office', 'like', '%' . $search . '%')
+            ->orWhereHas('requested', function ($query) use ($search) {
+                $query->where('first_name', 'LIKE', '%' . $search . '%')
+                    ->Orwhere('middle_name', 'LIKE', '%' . $search . '%')
+                    ->Orwhere('last_name', 'LIKE', '%' . $search . '%');
+            });
     }
 
     protected static function booted()
