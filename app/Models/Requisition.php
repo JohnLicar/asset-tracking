@@ -60,7 +60,7 @@ class Requisition extends Model
     {
         return $this->belongsToMany(Inventory::class, 'requisition_item')
             ->withPivot('quantity')
-            ->where('isConsumable', 1);
+            ->where('isConsumable', 0);
     }
 
     public function requested()

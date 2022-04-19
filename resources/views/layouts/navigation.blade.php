@@ -1,10 +1,10 @@
 <aside class="z-20 hidden w-64 overflow-y-auto bg-white md:block flex-shrink-0">
     <div class="py-4 text-gray-500">
-        <a class="ml-6 text-lg font-bold text-gray-800" href="{{ route('dashboard') }}">
-            GREGORIO CATENZA NATIONAL HIGHSCHOOL
+        <a class=" flex justify-center text-lg font-bold text-gray-800 " href="{{ route('dashboard') }}">
+            <img class="" src="{{ asset('images/logos/logo.png') }}" alt="" width="200" height="200">
         </a>
 
-        <ul class="mt-6">
+        <ul class="mt-2">
             @role('superadministrator')
             <li class="relative px-6 py-3">
                 <x-nav-link href="{{ route('sdashboard') }}" :active="request()->routeIs('sdashboard')">
@@ -59,7 +59,7 @@
                             </path>
                         </svg>
                     </x-slot>
-                    {{ __('Borrowed Item') }}
+                    {{ __('Issued Item') }}
                 </x-nav-link>
             </li>
 
@@ -196,7 +196,7 @@
                             </path>
                         </svg>
                     </x-slot>
-                    {{ __('Borrowed Item') }}
+                    {{ __('Issued Item') }}
                 </x-nav-link>
             </li>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Charts\RequisitionChart;
 use App\Http\Controllers\Controller;
+use App\Models\Inventory;
 use App\Models\Requisition;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ class SuperAdminDashboard extends Controller
     {
         $user = User::count();
         $pending = Requisition::where('status', Requisition::STATUS_PENDING)->count();
-        return view('dashboard', compact('user', 'pending'), ['chart' => $chart->build()]);
+        $items = Inventory::count();
+        return view('dashboard', compact('user', 'pending', 'items'), ['chart' => $chart->build()]);
     }
 }

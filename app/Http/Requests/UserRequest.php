@@ -29,10 +29,15 @@ class UserRequest extends FormRequest
             'middle_name' => 'required|min:2|nullable',
             'last_name' => 'required|min:2',
             'role' => 'required',
-            'email' => ['required', 'email', 'min:8', 'max:255', 'unique:users,email'],
+            'email' => ['required', 'email', 'unique:users,email', 'regex:/(.*)@(gmail|deped.gov)\.(com|ph)/i'],
             'contact_number' => 'required|min:9|unique:users',
             'position_id' => 'required_if:role,client',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:5048|nullable'
         ];
+    }
+
+    public function messages()
+    {
+        return ['email.regex' => 'Please use google account'];
     }
 }

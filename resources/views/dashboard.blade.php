@@ -22,7 +22,7 @@
                         <h1 class="ml-5 text-xl font-bold text-white">Users</h1>
                         <div class="flex ml-14 mt-4 text-white">
                             <img src="{{ asset('images/icons/task-completed.png') }}" alt="">
-                            <p class="text-7xl ml-14  font-black">{{ $user }}</p>
+                            <p class="text-7xl ml-14  font-black">{{ $user - 1 }}</p>
                         </div>
                     </div>
                     <div
@@ -30,15 +30,15 @@
                         <h1 class="ml-5 text-xl font-bold text-white">Number of Item in Inventory</h1>
                         <div class="flex ml-14 mt-4 text-white">
                             <img src="{{ asset('images/icons/counter.png') }}" alt="">
-                            <p class="text-7xl ml-10 font-black">12</p>
+                            <p class="text-7xl ml-10 font-black">{{ $items }}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white  mt-5 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white mt-5 overflow-hidden shadow-sm sm:rounded-lg">
 
-                <div class="p-6 m-20 bg-white rounded shadow">
+                <div class="p-6 mx-20 bg-white rounded shadow">
                     {!! $chart->container() !!}
                 </div>
             </div>

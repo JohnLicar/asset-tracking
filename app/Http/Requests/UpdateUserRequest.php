@@ -28,7 +28,7 @@ class UpdateUserRequest extends FormRequest
             'middle_name' => 'required|min:2|nullable',
             'last_name' => 'required|min:2',
             'role' => 'required',
-            'email' => ['required', 'email', 'min:8', 'max:255'],
+            'email' => ['required', 'email', 'regex:/(.*)@(gmail|lnu.edu)\.(com|ph)/i'],
             'contact_number' => 'required|min:9',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:5048|nullable'
         ];

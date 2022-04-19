@@ -33,6 +33,5 @@ class Inventory extends Model
         'status',
         'isConsumable',
         'inventory_number'
-
     ];
 }

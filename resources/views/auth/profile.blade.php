@@ -27,46 +27,74 @@
         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            <div class="grid grid-cols-3 gap-6">
+                <div>
+                    <x-label for="name" :value="__('First Name')" />
+                    <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" value="{{ auth()->user()->first_name }}" autofocus />
+                        @error('first_name')
+                        <span class="text-xs text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                </div>
+                <div>
+                    <x-label for="middle_name" :value="__('Middle Name')" />
+                    <x-input id="middle_name" class="block mt-1 w-full" type="text" name="middle_name" value="{{ auth()->user()->middle_name }}" autofocus />
+                        @error('middle_name')
+                        <span class="text-xs text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                <div>
+                    <x-label for="last_name" :value="__('Last Name')" />
+                    <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" value="{{ auth()->user()->last_name }}" autofocus />
+                        @error('last_name')
+                        <span class="text-xs text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
 
-            <div class="mt-4">
-                <x-label for="name" :value="__('Name')" />
-                <x-input type="text" id="name" name="name" class="block w-full"
-                    value="{{ old('name', auth()->user()->name) }}" required />
-                @error('name')
-                <span class="text-xs text-red-600 dark:text-red-400">
-                    {{ $message }}
-                </span>
-                @enderror
             </div>
 
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-                <x-input name="email" type="email" class="block w-full"
-                    value="{{ old('email', auth()->user()->email) }}" required />
-                @error('email')
-                <span class="text-xs text-red-600 dark:text-red-400">
-                    {{ $message }}
-                </span>
-                @enderror
+            <div class="grid grid-cols-2 gap-6 my-4">
+                <div>
+                    <x-label for="email" :value="__('Email')" />
+                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{ auth()->user()->email }}" autofocus />
+                        @error('email')
+                        <span class="text-xs text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                
             </div>
+            <div class="grid grid-col-2 gap-6">
+                <div>
+                    <x-label for="new_password" :value="__('New password')" />
+                    <x-input id="new_password" class="block mt-1 w-full"
+                             type="password"
+                             name="password"
+                             autocomplete="new-password" />
+                </div>
+                <div>
+                    <x-label for="confirm_password" :value="__('Confirm password')" />
+                    <x-input id="confirm_password" class="block mt-1 w-full"
+                             type="password"
+                             name="password_confirmation"
+                             autocomplete="confirm-password" />
+                </div>
 
-            <div class="mt-4">
-                <x-label for="password" :value="__('New password')" />
-                <x-input type="password" name="password" class="block w-full" required />
                 @error('password')
-                <span class="text-xs text-red-600 dark:text-red-400">
-                    {{ $message }}
-                </span>
-                @enderror
+                        <span class="text-xs text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                        @enderror
             </div>
 
             <div class="mt-4">
-                <x-label id="password_confirmation" :value="__('New password confirmation')" />
-                <x-input type="password" name="password_confirmation" class="block w-full" required />
-            </div>
-
-            <div class="mt-4">
-                {{ auth()->user()->signature }}
+               
                 <img src="{{ asset('images/signatures/'.auth()->user()->signature ) }}" width="176" height="176">
 
                 @error('signature')

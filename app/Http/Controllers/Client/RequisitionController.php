@@ -38,6 +38,10 @@ class RequisitionController extends Controller
      */
     public function create(Inventory $item)
     {
+        if(!auth()->user()->signature){
+            toast('Please add Signature first', 'error');
+            return redirect()->route('cdashboard');
+        }
         return view('client.requisition.create', compact('item'));
     }
 
@@ -71,7 +75,7 @@ class RequisitionController extends Controller
 
         $items = Requisition::with(['unit', 'requested', 'approved'])
             ->where('requested_by', auth()->id())
-            ->whereRelation('unit', 'isConsumable', 1)
+            ->whereRelation('unit', 'isConsumable', 0)
             ->whereIn('status', [2, 4])
 
             ->paginate(10);
@@ -105,7 +109,7 @@ class RequisitionController extends Controller
     public function destroy(Requisition $requisition)
     {
         $items = RequisitionItem::with('requester', 'unit', 'requesition.approved')->inventory($requisition->id)
-            ->whereRelation('unit', 'isConsumable', 1)
+            ->whereRelation('unit', 'isConsumable', 0)
             ->get();
 
         foreach ($items as $item) {

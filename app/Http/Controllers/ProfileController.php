@@ -15,16 +15,19 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request)
     {
 
+        auth()->user()->update($request->only('first_name', 'middle_name', 'last_name', 'email'));
+
         if ($request->password) {
             auth()->user()->update(['password' => Hash::make($request->password)]);
         }
 
-        if ($request->name) {
-            auth()->user()->update([
-                'name' => $request->name,
-                'email' => $request->email,
-            ]);
-        }
+        // if ($request->name) {
+        //     auth()->user()->update([
+        //         'name' => $request->name,
+        //         'email' => $request->email,
+        //     ]);
+        // }
+
 
         if ($request->hasFile('signature')) {
             $signature =  auth()->id() . '-' .   auth()->user()->first_name . '-' .   auth()->user()->last_name . '.' . $request->signature->getClientOriginalExtension();

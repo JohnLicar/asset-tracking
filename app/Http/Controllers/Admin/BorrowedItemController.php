@@ -22,7 +22,7 @@ class BorrowedItemController extends Controller
 
         $requisitions = Requisition::with(['unit', 'requested', 'approved'])
             ->where('status', 2)
-            ->whereRelation('unit', 'isConsumable', 1)
+            ->whereRelation('unit', 'isConsumable', 0)
             ->paginate(10);
         return view('admin.borrowed-item.index', compact('requisitions'));
     }

@@ -20,6 +20,10 @@
                                 <x-label for="name" :value="__('Unit Name')" />
                                 <x-input id="unit" class="block mt-1 w-full" type="text" name="unit"
                                     :value="old('unit')" />
+
+                                    <x-input id="inventory_number" class="block mt-1 w-full" type="hidden" name="inventory_number"
+                                    value="{{ $inventory_number }}"
+                                     />
                             </div>
 
                             <div>

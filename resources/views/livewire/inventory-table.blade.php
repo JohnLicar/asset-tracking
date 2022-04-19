@@ -35,7 +35,7 @@
                     @foreach($items as $index => $item)
                         <tr class="text-gray-700">
                             <td class="px-4 py-3 text-sm">
-                                {{ $index + 1 }}
+                                {{ $item->inventory_number }}
                             </td>
 
                             <td class="px-4 py-3 text-sm">

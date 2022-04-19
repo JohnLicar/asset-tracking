@@ -30,7 +30,9 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        return view('admin.inventory.create');
+        $prefix = Str::upper(Str::substr(Carbon::now()->format('F'), 0, 3));
+        $inventory_number = IdGenerator::generate(['table' => 'inventory', 'field' => 'inventory_number', 'length' => 6, 'prefix' => $prefix]);
+        return view('admin.inventory.create', compact('inventory_number'));
     }
 
     /**
@@ -41,14 +43,7 @@ class InventoryController extends Controller
      */
     public function store(ItemRequest $request)
     {
-
-        $prefix = Str::upper(Str::substr(Carbon::now()->format('F'), 0, 3));
-        $inventory_number = IdGenerator::generate(['table' => 'inventory', 'field' => 'inventory_number', 'length' => 6, 'prefix' => $prefix]);
-        $request->request->add([
-            'inventory_number' => $inventory_number
-        ]);
-
-        Inventory::create($request->validated());
+     Inventory::create($request->validated());
         toast('Item added successfully', 'success');
         return redirect()->route('inventory.index');
     }
