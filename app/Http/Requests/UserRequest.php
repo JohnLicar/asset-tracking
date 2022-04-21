@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
         return [
             'idnumber' => 'required|min:6',
             'first_name' => 'required|min:2',
-            'middle_name' => 'required|min:2|nullable',
+            'middle_name' => 'min:2|nullable',
             'last_name' => 'required|min:2',
             'role' => 'required',
             'email' => ['required', 'email', 'unique:users,email', 'regex:/(.*)@(gmail|deped.gov)\.(com|ph)/i'],

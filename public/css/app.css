@@ -669,8 +669,8 @@ select {
 .float-left {
   float: left;
 }
-.m-20 {
-  margin: 5rem;
+.m-5 {
+  margin: 1.25rem;
 }
 .mx-auto {
   margin-left: auto;
@@ -687,6 +687,10 @@ select {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+.mx-20 {
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 .my-8 {
   margin-top: 2rem;
@@ -777,6 +781,9 @@ select {
 }
 .mr-3 {
   margin-right: 0.75rem;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 .block {
   display: block;
@@ -1294,6 +1301,10 @@ select {
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 .text-7xl {
   font-size: 4.5rem;

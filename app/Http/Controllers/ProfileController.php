@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\UserLog;
 
 class ProfileController extends Controller
 {
@@ -21,13 +22,6 @@ class ProfileController extends Controller
             auth()->user()->update(['password' => Hash::make($request->password)]);
         }
 
-        // if ($request->name) {
-        //     auth()->user()->update([
-        //         'name' => $request->name,
-        //         'email' => $request->email,
-        //     ]);
-        // }
-
 
         if ($request->hasFile('signature')) {
             $signature =  auth()->id() . '-' .   auth()->user()->first_name . '-' .   auth()->user()->last_name . '.' . $request->signature->getClientOriginalExtension();
@@ -36,6 +30,12 @@ class ProfileController extends Controller
         }
 
 
+        UserLog::create([
+            'log_name' => 'Account Updated',
+            'event' => 'logout',
+            'user_id' => auth()->id(),
+            'description' => 'You\'ve updated your account information. '
+        ]);
 
         return redirect()->back()->with('success', 'Profile updated.');
     }

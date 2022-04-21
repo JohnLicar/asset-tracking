@@ -26,33 +26,36 @@
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
                         <th class="px-4 py-3">Quantity</th>
                         <th class="px-4 py-3">Unit (Name of Item)</th>
-                        <th class="px-4 py-3">Description</th>
                         <th class="px-4 py-3">Devision</th>
                         <th class="px-4 py-3">Office</th>
                         <th class="px-4 py-3">Requested by</th>
-                        <th class="px-4 py-3">Approved by</th>
+                        <th class="px-4 py-3">Declined by</th>
                         <th class="px-4 py-3">Purpose</th>
-
                       </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                      @foreach($items as $index => $item)
+                      @foreach($requisitions as $index => $item)
                       <tr class="text-gray-700">
 
                         <td class="px-4 py-3 text-sm">
-                          {{ $item->quantity }}
-                        </td>
+                          @foreach ($item->request as $request)
+                          <ol class="list-decimal">
+                            <li>
+                              {{ $request->quantity }}
+                            </li>
+                          </ol>
+                          @endforeach
 
-                        <td class="px-4 py-3 text-sm">
-                          {{ $item->unit->unit }}
-                        </td>
 
-                        <td class="px-4 py-3 text-sm">
-                          {{ $item->unit->description }}
                         </td>
-
                         <td class="px-4 py-3 text-sm">
-                          {{ $item->purpose }}
+                          @foreach ($item->request as $request)
+                          <ol class="list-decimal">
+                            <li>
+                              {{ $request->unit->unit }}
+                            </li>
+                          </ol>
+                          @endforeach
                         </td>
 
                         <td class="px-4 py-3 text-sm">
@@ -71,6 +74,10 @@
                           {{ $item->approved?->full_name }}
                         </td>
 
+                        <td class="px-4 py-3 text-sm">
+                          {{ $item->purpose }}
+                        </td>
+
                       </tr>
                       @endforeach
                     </tbody>
@@ -78,7 +85,7 @@
                 </div>
                 <div
                   class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
-                  {{ $items->links() }}
+                  {{ $requisitions->links() }}
                 </div>
               </div>
 

@@ -98,6 +98,9 @@
                             </td>
 
 
+
+                            @if (auth()->user()->signature)
+
                             @if ($item->status == 1)
                             <td class="flex  px-4 py-3 text-sm">
                                 <button class="mt-2 mr-5 text-green-600 hover:text-green-900"
@@ -110,6 +113,13 @@
                                     Decline
                                 </button>
                             </td>
+                            @endif
+                            @else
+                            <td class="px-4 py-3 text-sm text-center">
+                                <P>Add Singnature in your Profile</P>
+                            </td>
+
+
                             @endif
                         </tr>
                         @endforeach

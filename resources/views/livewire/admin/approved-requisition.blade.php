@@ -71,13 +71,21 @@
                                 {{ $item->approved?->full_name }}
                             </td>
 
-                            <td class="text-center px-4 py-3 text-sm">
+                            @if (auth()->user()->signature)
+
+                            <td class="px-4 py-3 text-sm text-center">
                                 <a target="_blank" href="{{ route('approved-requisition.create', $item) }}"
                                     class="text-indigo-600 hover:text-indigo-900 align-middle">
                                     <i class="gg-printer"></i>
 
                                 </a>
                             </td>
+                            @else
+                            <td class="px-4 py-3 text-sm text-center">
+                                <P>Add Singnature in your Profile</P>
+                            </td>
+                            @endif
+
                         </tr>
                         @endforeach
                     </tbody>

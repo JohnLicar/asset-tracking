@@ -11,6 +11,7 @@ use App\Http\Controllers\RedirectUserController;
 use App\Http\Controllers\Client\RequisitionController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\SuperAdmin\SuperAdminDashboard;
+use App\Http\Controllers\SuperAdmin\UserLogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('requisitions', RequisitionController::class)->only(['index', 'update']);
         Route::get('borrowed-requisition', BorrowedItemController::class)->name('superadmin.borrowed-item');
         Route::get('logs', LogController::class)->name('superadmin.logs');
+        Route::get('user-logs', UserLogController::class)->name('superadmin.userlogs');
     });
 
     Route::group(['prefix' => 'admin', 'middleware' => ['role:administrator']], function () {

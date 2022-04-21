@@ -16,10 +16,15 @@ class DeclineRequisitionController extends Controller
      */
     public function __invoke()
     {
-        $items = Requisition::with(['unit', 'requested', 'approved'])
-        ->where('status', 3)
-        ->paginate(10);
+        // $items = Requisition::with(['unit', 'requested', 'approved'])
+        // ->where('status', 3)
+        // ->paginate(10);
 
-        return view('admin.requisition.declined-requisition', compact('items'));
+        $requisitions  = Requisition::with('request.unit', 'approved')
+            // ->whereRelation('request', 'requested_by', auth()->id())
+            ->where('status', 3)
+            ->paginate(10);
+
+        return view('admin.requisition.declined-requisition', compact('requisitions'));
     }
 }

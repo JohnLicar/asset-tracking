@@ -8,15 +8,17 @@ use App\Models\RequisitionItem;
 use App\Models\User;
 use App\Notifications\ApproveRequestNotification;
 use LivewireUI\Modal\ModalComponent;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class ApproveModal extends ModalComponent
 {
-
+    use LivewireAlert;
     public  $items;
     public $remarks;
 
     public function mount($requisition)
     {
+
         $this->items = RequisitionItem::with('requester', 'unit', 'requesition.approved')->inventory($requisition)->get();
     }
 
@@ -57,8 +59,13 @@ class ApproveModal extends ModalComponent
         $this->items[0]->requester->notify(new ApproveRequestNotification($clientData));
 
         $this->closeModal();
-        toast('Request Approved successfully', 'success');
-        return redirect()->route('requisitions.index');
+        $this->alert('success', 'Please add Signature first', [
+            'position' => 'top-end',
+            'timer' => 3000,
+            'toast' => true,
+            'showCancelButton' => false,
+            'showConfirmButton' => false
+        ]);
     }
 
     public function closeApproveModal()

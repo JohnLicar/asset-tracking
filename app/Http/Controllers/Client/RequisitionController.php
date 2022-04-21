@@ -38,7 +38,7 @@ class RequisitionController extends Controller
      */
     public function create(Inventory $item)
     {
-        if(!auth()->user()->signature){
+        if (!auth()->user()->signature) {
             toast('Please add Signature first', 'error');
             return redirect()->route('cdashboard');
         }
@@ -117,12 +117,6 @@ class RequisitionController extends Controller
                 'quantity' => ($item->unit->quantity + $item->quantity)
             ]);
         }
-
-        // $item = Inventory::find($requisition->inventory_id);
-
-        // $item->update([
-        //     'quantity' => ($item->quantity + $requisition->quantity)
-        // ]);
 
         $requisition->delete();
         toast('Item returned successfully', 'success');
