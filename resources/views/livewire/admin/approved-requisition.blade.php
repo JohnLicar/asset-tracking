@@ -31,7 +31,7 @@
 
                             <td class="px-4 py-3 text-sm">
                                 @foreach ($item->request as $request)
-                                <ol class="list-decimal">
+                                <ol>
                                     <li>
                                         {{ $request->quantity }}
                                     </li>
@@ -42,17 +42,12 @@
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 @foreach ($item->request as $request)
-                                <ol class="list-decimal">
+                                <ol>
                                     <li>
                                         {{ $request->unit->unit }}
                                     </li>
                                 </ol>
                                 @endforeach
-                            </td>
-
-
-                            <td class="px-4 py-3 text-sm">
-                                {{ $item->purpose }}
                             </td>
 
                             <td class="px-4 py-3 text-sm">
@@ -69,6 +64,11 @@
 
                             <td class="px-4 py-3 text-sm">
                                 {{ $item->approved?->full_name }}
+                            </td>
+
+
+                            <td class="px-4 py-3 text-sm">
+                                {{ $item->purpose }}
                             </td>
 
                             @if (auth()->user()->signature)

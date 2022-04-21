@@ -43,7 +43,7 @@
 
                             <td class="px-4 py-3 text-sm">
                                 @foreach ($item->request as $request)
-                                <ol class="list-decimal">
+                                <ol>
                                     <li>
                                         {{ $request->quantity }}
                                     </li>
@@ -54,7 +54,7 @@
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 @foreach ($item->request as $request)
-                                <ol class="list-decimal">
+                                <ol>
                                     <li>
                                         {{ $request->unit->unit }}
                                     </li>
