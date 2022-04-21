@@ -34,4 +34,11 @@ class Inventory extends Model
         'isConsumable',
         'inventory_number'
     ];
+
+    public static function search($search)
+    {
+        return empty($search) ? static::query()
+            : static::query()->where('inventory_number', 'like', '%' . $search . '%')
+            ->OrWhere('unit', 'like', '%' . $search . '%');
+    }
 }

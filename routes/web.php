@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'client', 'middleware' => ['role:client']], function () {
         Route::get('cdashboard', [ClientDashboard::class, 'index'])->name('cdashboard');
+        Route::get('inventory', fn () => view('client.inventory'))->name('requisition.create.inventory');
         Route::get('requisition/{item}', [RequisitionController::class, 'create'])->name('requisition.create');
         Route::get('my-approved-requisition', [ApprovedRequisitionController::class, 'approved'])->name('requisition.approved');
         Route::get('return-item', [RequisitionController::class, 'toBeReturn'])->name('toBeReturn');

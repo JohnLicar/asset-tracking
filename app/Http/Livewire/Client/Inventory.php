@@ -9,9 +9,11 @@ use Livewire\WithPagination;
 class Inventory extends Component
 {
     use WithPagination;
+    public $search = '';
     public function render()
     {
-        $items = ModelsInventory::paginate(10);
+        $items = ModelsInventory::search($this->search)
+            ->paginate(10);
         return view('livewire.client.inventory', compact('items'));
     }
 }

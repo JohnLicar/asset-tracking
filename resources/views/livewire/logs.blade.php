@@ -5,7 +5,7 @@
 
     <div class=" bg-white rounded-lg shadow-xs">
         <div>
-            <h1 class="text-3xl mb-5">Rquisition Logs</h1>
+            <h1 class="text-3xl mb-5">Returned Requisition Logs</h1>
         </div>
         <div class=" flex justify-between space-x-4 mb-3">
 

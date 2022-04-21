@@ -59,7 +59,7 @@ class ApproveModal extends ModalComponent
         $this->items[0]->requester->notify(new ApproveRequestNotification($clientData));
 
         $this->closeModal();
-        $this->alert('success', 'Please add Signature first', [
+        $this->alert('success', 'Requisition Apporved', [
             'position' => 'top-end',
             'timer' => 3000,
             'toast' => true,

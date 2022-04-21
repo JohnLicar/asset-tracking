@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Charts\BorrowChart;
+use App\Charts\RequisitionChart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Requisition;
 
 class ClientDashboard extends Controller
 {
@@ -12,9 +15,15 @@ class ClientDashboard extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(BorrowChart $chart)
     {
-        return view('client.dashboard');
+        $approve = Requisition::where('requested_by', auth()->id())
+            ->where('status', Requisition::STATUS_APRROVE)->count();
+        $decline = Requisition::where('requested_by', auth()->id())
+            ->where('status', Requisition::STATUS_DECLINE)->count();
+        $request =  Requisition::where('requested_by', auth()->id())
+            ->where('status', Requisition::STATUS_PENDING)->count();
+        return view('admin.dashboard', compact('approve', 'decline', 'request'), ['chart' => $chart->build()]);
     }
 
     /**
