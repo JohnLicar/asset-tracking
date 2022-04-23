@@ -94,6 +94,11 @@
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-500 text-white">
                                     Returning
                                 </span>
+                                @elseif ($item->status == 5)
+                                <span
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-500 text-white">
+                                    Issued
+                                </span>
                                 @endif
                             </td>
 
