@@ -76,8 +76,7 @@ class RequisitionController extends Controller
         $items = Requisition::with(['unit', 'requested', 'approved'])
             ->where('requested_by', auth()->id())
             ->whereRelation('unit', 'isConsumable', 0)
-            ->whereIn('status', [2, 4])
-
+            ->whereIn('status', [5, 4])
             ->paginate(10);
         // dd($items);
 

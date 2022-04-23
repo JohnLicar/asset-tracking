@@ -45,9 +45,9 @@
                         <td class="px-4 py-3 text-sm">
                           @foreach ($item->unit as $request)
                           <ol class="list-decimal">
-                            <li>
-                              {{ $request->pivot->quantity }}
-                            </li>
+
+                            {{ $request->pivot->quantity }}
+
                           </ol>
                           @endforeach
 
@@ -56,9 +56,9 @@
                         <td class="px-4 py-3 text-sm">
                           @foreach ($item->unit as $request)
                           <ol class="list-decimal">
-                            <li>
-                              {{ $request->unit }}
-                            </li>
+
+                            {{ $request->unit }}
+
                           </ol>
                           @endforeach
                         </td>
@@ -71,13 +71,11 @@
                           {{ $item->office }}
                         </td>
 
-                        <td class="px-4 py-3 text-sm">
-                          {{ $item->requested->full_name }}
-                        </td>
 
                         <td class="px-4 py-3 text-sm">
                           {{ $item->approved?->full_name }}
                         </td>
+
 
                         <td class="px-4 py-3 text-sm">
                           {{ $item->purpose }}
@@ -103,6 +101,11 @@
                           <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-500 text-white">
                             Returning
+                          </span>
+                          @elseif ($item->status == 5)
+                          <span
+                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-500 text-white">
+                            Issued
                           </span>
                           @endif
                         </td>

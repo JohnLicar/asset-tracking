@@ -15,6 +15,7 @@ class Requisition extends Model
     const STATUS_APRROVE = 2;
     const STATUS_DECLINE = 3;
     const STATUS_TO_RETURN = 4;
+    const STATUS_TO_ISSUED = 5;
 
     /**
      * The attributes that should be cast.

@@ -22,7 +22,9 @@
                             <th class="px-4 py-3">Requested by</th>
                             <th class="px-4 py-3">Approved by</th>
                             <th class="px-4 py-3">Purpose</th>
+                            @if (auth()->user()->roles[0]->display_name == 'Administrator')
                             <th class="px-4 py-3 text-center">Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -32,9 +34,9 @@
                             <td class="px-4 py-3 text-sm">
                                 @foreach ($item->request as $request)
                                 <ol>
-                                    <li>
-                                        {{ $request->quantity }}
-                                    </li>
+
+                                    {{ $request->quantity }}
+
                                 </ol>
                                 @endforeach
 
@@ -43,9 +45,8 @@
                             <td class="px-4 py-3 text-sm">
                                 @foreach ($item->request as $request)
                                 <ol>
-                                    <li>
-                                        {{ $request->unit->unit }}
-                                    </li>
+                                    {{ $request->unit->unit }}
+
                                 </ol>
                                 @endforeach
                             </td>
@@ -71,12 +72,19 @@
                                 {{ $item->purpose }}
                             </td>
 
+                            @if (auth()->user()->roles[0]->display_name == 'Administrator')
                             @if (auth()->user()->signature)
 
-                            <td class="px-4 py-3 text-sm text-center">
+                            <td class="flex justify-between px-4 py-3 text-sm text-center mt-5 mr-3">
                                 <a target="_blank" href="{{ route('approved-requisition.create', $item) }}"
                                     class="text-indigo-600 hover:text-indigo-900 align-middle">
                                     <i class="gg-printer"></i>
+
+                                </a>
+
+                                <a href="{{ route('approved-requisition.issue', $item) }}"
+                                    class="text-indigo-600 hover:text-indigo-900 align-middle mt-1.5">
+                                    <i class="gg-read"></i>
 
                                 </a>
                             </td>
@@ -84,6 +92,7 @@
                             <td class="px-4 py-3 text-sm text-center">
                                 <P>Add Singnature in your Profile</P>
                             </td>
+                            @endif
                             @endif
 
                         </tr>

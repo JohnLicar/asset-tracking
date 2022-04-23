@@ -51,6 +51,16 @@ class ApprovedRequisitionController extends Controller
         return PDF::setOptions(['isHTML5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('admin.pdf.pdf', ['requisitions' => $requisitions, 'image' => $signatures])->stream();
     }
 
+    public function issue(Requisition $requisition)
+    {
+
+        $requisition->update([
+            'status' => Requisition::STATUS_TO_ISSUED
+        ]);
+        toast('Item issued successfully', 'success');
+        return redirect()->route('approved-requisition.index');
+    }
+
     public function approved()
     {
 

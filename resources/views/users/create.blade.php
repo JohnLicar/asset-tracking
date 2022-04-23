@@ -17,7 +17,7 @@
                         <div class="grid grid-cols-3 gap-6">
 
                             <div>
-                                <x-label for="name" :value="__('ID Number')" />
+                                <x-label for="name" :value="__('Employee Number')" />
                                 <x-input id="idnumber" class="block mt-1 w-full" type="number" name="idnumber"
                                     :value="old('idnumber')" autofocus />
                             </div>

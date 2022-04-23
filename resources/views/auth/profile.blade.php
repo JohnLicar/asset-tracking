@@ -30,73 +30,90 @@
             <div class="grid grid-cols-3 gap-6">
                 <div>
                     <x-label for="name" :value="__('First Name')" />
-                    <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" value="{{ auth()->user()->first_name }}" autofocus />
-                        @error('first_name')
-                        <span class="text-xs text-red-600 dark:text-red-400">
-                            {{ $message }}
-                        </span>
-                        @enderror
+                    <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
+                        value="{{ auth()->user()->first_name }}" autofocus />
+                    @error('first_name')
+                    <span class="text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </span>
+                    @enderror
                 </div>
                 <div>
                     <x-label for="middle_name" :value="__('Middle Name')" />
-                    <x-input id="middle_name" class="block mt-1 w-full" type="text" name="middle_name" value="{{ auth()->user()->middle_name }}" autofocus />
-                        @error('middle_name')
-                        <span class="text-xs text-red-600 dark:text-red-400">
-                            {{ $message }}
-                        </span>
-                        @enderror
-                    </div>
+                    <x-input id="middle_name" class="block mt-1 w-full" type="text" name="middle_name"
+                        value="{{ auth()->user()->middle_name }}" autofocus />
+                    @error('middle_name')
+                    <span class="text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </span>
+                    @enderror
+                </div>
                 <div>
                     <x-label for="last_name" :value="__('Last Name')" />
-                    <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" value="{{ auth()->user()->last_name }}" autofocus />
-                        @error('last_name')
-                        <span class="text-xs text-red-600 dark:text-red-400">
-                            {{ $message }}
-                        </span>
-                        @enderror
-                    </div>
+                    <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
+                        value="{{ auth()->user()->last_name }}" autofocus />
+                    @error('last_name')
+                    <span class="text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </span>
+                    @enderror
+                </div>
 
             </div>
 
             <div class="grid grid-cols-2 gap-6 my-4">
                 <div>
                     <x-label for="email" :value="__('Email')" />
-                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{ auth()->user()->email }}" autofocus />
-                        @error('email')
-                        <span class="text-xs text-red-600 dark:text-red-400">
-                            {{ $message }}
-                        </span>
-                        @enderror
-                    </div>
-                
+                    <x-input id="email" class="block mt-1 w-full" type="email" name="email"
+                        value="{{ auth()->user()->email }}" autofocus />
+                    @error('email')
+                    <span class="text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </span>
+                    @enderror
+                </div>
+
+                @if (auth()->user()->roles[0]->display_name == 'Client')
+                <div>
+                    <x-label for="position_id" :value="__('Position')" />
+                    <select id="position_id" name="position_id"
+                        class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        @foreach ($positions as $position)
+                        <option value="{{ $position->id }}" @if ($position->id === auth()->user()->position_id )
+                            selected @endif>
+                            {{ $position->description }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+                @endif
+
             </div>
             <div class="grid grid-col-2 gap-6">
                 <div>
                     <x-label for="new_password" :value="__('New password')" />
-                    <x-input id="new_password" class="block mt-1 w-full"
-                             type="password"
-                             name="password"
-                             autocomplete="new-password" />
+                    <x-input id="new_password" class="block mt-1 w-full" type="password" name="password"
+                        autocomplete="new-password" />
                 </div>
                 <div>
                     <x-label for="confirm_password" :value="__('Confirm password')" />
-                    <x-input id="confirm_password" class="block mt-1 w-full"
-                             type="password"
-                             name="password_confirmation"
-                             autocomplete="confirm-password" />
+                    <x-input id="confirm_password" class="block mt-1 w-full" type="password"
+                        name="password_confirmation" autocomplete="confirm-password" />
                 </div>
 
                 @error('password')
-                        <span class="text-xs text-red-600 dark:text-red-400">
-                            {{ $message }}
-                        </span>
-                        @enderror
+                <span class="text-xs text-red-600 dark:text-red-400">
+                    {{ $message }}
+                </span>
+                @enderror
             </div>
 
             <div class="mt-4">
-               
-                <img src="{{ asset('images/signatures/'.auth()->user()->signature ) }}" width="176" height="176">
 
+                <img src="{{ asset('images/signatures/'.auth()->user()->signature ) }}" width="176" height="176">
+                <span class="text-xs text-orange-600 dark:text-red-400">
+                    Please use Transparent image for signature
+                </span>
                 @error('signature')
                 <span class="text-xs text-red-600 dark:text-red-400">
                     {{ $message }}

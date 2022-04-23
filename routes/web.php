@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::get('borrowed-requisition', BorrowedItemController::class)->name('superadmin.borrowed-item');
         Route::get('logs', LogController::class)->name('superadmin.logs');
         Route::get('user-logs', UserLogController::class)->name('superadmin.userlogs');
+        Route::get('approved-requisition', [ApprovedRequisitionController::class, 'index'])->name('superadmin.approved-requisition');
     });
 
     Route::group(['prefix' => 'admin', 'middleware' => ['role:administrator']], function () {
@@ -54,6 +55,7 @@ Route::middleware('auth')->group(function () {
         Route::get('returned-items', [RequisitionController::class, 'approveReturn'])->name('admin-return');
         Route::delete('returned-items/{requisition}', [RequisitionController::class, 'destroy'])->name('delete-approved-return');
         Route::get('approved-requisition/{requisition}', [ApprovedRequisitionController::class, 'create'])->name('approved-requisition.create');
+        Route::get('issue/{requisition}', [ApprovedRequisitionController::class, 'issue'])->name('approved-requisition.issue');
         Route::resource('approved-requisition', ApprovedRequisitionController::class)->except('create');
         Route::get('borrowed-requisition', BorrowedItemController::class)->name('borrowed-item');
         Route::get('decline-requisition', DeclineRequisitionController::class)->name('declined-requisition');

@@ -59,13 +59,8 @@ class ApproveModal extends ModalComponent
         $this->items[0]->requester->notify(new ApproveRequestNotification($clientData));
 
         $this->closeModal();
-        $this->alert('success', 'Requisition Apporved', [
-            'position' => 'top-end',
-            'timer' => 3000,
-            'toast' => true,
-            'showCancelButton' => false,
-            'showConfirmButton' => false
-        ]);
+        toast('Request Approved successfully', 'success');
+        return redirect()->route('requisitions.index');
     }
 
     public function closeApproveModal()
