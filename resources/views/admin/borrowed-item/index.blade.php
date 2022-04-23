@@ -42,9 +42,9 @@
                         <td class="px-4 py-3 text-sm">
                           @foreach ($item->unit as $request)
                           <ol class="list-decimal">
-                            <li>
-                              {{ $request->pivot->quantity }}
-                            </li>
+
+                            {{ $request->pivot->quantity }}
+
                           </ol>
                           @endforeach
 
@@ -52,9 +52,9 @@
                         <td class="px-4 py-3 text-sm">
                           @foreach ($item->unit as $request)
                           <ol class="list-decimal">
-                            <li>
-                              {{ $request->unit }}
-                            </li>
+
+                            {{ $request->unit }}
+
                           </ol>
                           @endforeach
                         </td>

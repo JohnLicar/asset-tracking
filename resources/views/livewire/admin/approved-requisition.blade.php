@@ -82,9 +82,16 @@
 
                                 </a>
 
-                                <a href="{{ route('approved-requisition.issue', $item) }}"
-                                    class="text-indigo-600 hover:text-indigo-900 align-middle mt-1.5">
-                                    <i class="gg-read"></i>
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900 align-middle mt-1.5">
+
+
+                                    <form action="{{ route('approved-requisition.issue', $item) }}" method="PUT">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('Are you sure?')" class="w-4 h-4">
+                                            <i class="gg-read"></i>
+                                        </button>
+                                    </form>
 
                                 </a>
                             </td>
