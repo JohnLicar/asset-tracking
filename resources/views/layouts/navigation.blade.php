@@ -287,7 +287,7 @@
                             </path>
                         </svg>
                     </x-slot>
-                    {{ __('Owned Item') }}
+                    {{ __('Return Item') }}
                 </x-nav-link>
             </li>
 
