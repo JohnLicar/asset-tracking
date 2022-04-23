@@ -1,6 +1,6 @@
 <div>
     <x-slot name="header">
-        {{ __('Inventory') }}
+        {{ __('Requisitions') }}
     </x-slot>
 
     <div class=" bg-white rounded-lg shadow-xs">
