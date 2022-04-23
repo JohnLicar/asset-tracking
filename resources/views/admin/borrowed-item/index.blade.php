@@ -32,6 +32,7 @@
                         <th class="px-4 py-3">Requested by</th>
                         <th class="px-4 py-3">Approved by</th>
                         <th class="px-4 py-3">Purpose</th>
+                        <th class="px-4 py-3">Issued Date</th>
 
                       </tr>
                     </thead>
@@ -77,6 +78,11 @@
 
                         <td class="px-4 py-3 text-sm">
                           {{ $item->purpose }}
+                        </td>
+
+
+                        <td class="px-4 py-3 text-sm">
+                          {{ $item->issued_date }}
                         </td>
 
 
