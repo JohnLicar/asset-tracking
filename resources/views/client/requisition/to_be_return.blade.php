@@ -12,9 +12,6 @@
         <div class="p-3 bg-white border-b border-gray-200">
 
           <div>
-            <x-slot name="header">
-              {{ __('Approved Requisition') }}
-            </x-slot>
 
             <div class=" bg-white rounded-lg shadow-xs">
               <div class=" flex justify-between space-x-4 mb-3">
