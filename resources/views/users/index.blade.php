@@ -58,7 +58,7 @@
                             </td>
 
                             <td class="px-4 py-3 text-sm">
-                                {{ $user->position?->description }}
+                                {{ $user->position?->description ?? 'Property Custodian'}}
                             </td>
 
                             <td class="px-4 py-3 text-sm">
