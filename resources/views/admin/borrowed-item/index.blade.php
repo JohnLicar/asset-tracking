@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Borrowed Item') }}
+      {{ __('Issued Item') }}
     </h2>
   </x-slot>
 
@@ -40,7 +40,7 @@
                       <tr class="text-gray-700">
 
                         <td class="px-4 py-3 text-sm">
-                          @foreach ($item->unit as $request)
+                          @foreach ($item->notCosumableUnit as $request)
                           <ol class="list-decimal">
 
                             {{ $request->pivot->quantity }}
@@ -50,11 +50,9 @@
 
                         </td>
                         <td class="px-4 py-3 text-sm">
-                          @foreach ($item->unit as $request)
+                          @foreach ($item->notCosumableUnit as $request)
                           <ol class="list-decimal">
-
                             {{ $request->unit }}
-
                           </ol>
                           @endforeach
                         </td>

@@ -64,6 +64,12 @@ class Requisition extends Model
             ->where('isConsumable', 0);
     }
 
+    public function notCosumableUnit()
+    {
+        return $this->belongsToMany(Inventory::class, 'requisition_item')
+            ->withPivot('quantity');
+    }
+
     public function requested()
     {
         return $this->belongsTo(User::class, 'requested_by');

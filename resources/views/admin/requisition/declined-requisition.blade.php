@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Approved Requisition') }}
+      {{ __('Declined Requisition') }}
     </h2>
   </x-slot>
 
@@ -40,9 +40,9 @@
                         <td class="px-4 py-3 text-sm">
                           @foreach ($item->request as $request)
                           <ol class="list-decimal">
-                            <li>
-                              {{ $request->quantity }}
-                            </li>
+
+                            {{ $request->quantity }}
+
                           </ol>
                           @endforeach
 
@@ -51,9 +51,9 @@
                         <td class="px-4 py-3 text-sm">
                           @foreach ($item->request as $request)
                           <ol class="list-decimal">
-                            <li>
-                              {{ $request->unit->unit }}
-                            </li>
+
+                            {{ $request->unit->unit }}
+
                           </ol>
                           @endforeach
                         </td>

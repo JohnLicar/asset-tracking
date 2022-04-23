@@ -20,10 +20,12 @@ class BorrowedItemController extends Controller
         // ->where('status', 2)
         // ->paginate(10);
 
-        $requisitions = Requisition::with(['unit', 'requested', 'approved'])
+        $requisitions = Requisition::with(['notCosumableUnit', 'requested', 'approved'])
             ->where('status', 5)
-            // ->whereRelation('unit', 'isConsumable', 0)
+
             ->paginate(10);
+
+        // dd($requisitions);
         return view('admin.borrowed-item.index', compact('requisitions'));
     }
 }
