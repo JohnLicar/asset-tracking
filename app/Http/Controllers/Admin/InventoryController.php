@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemRequest;
+use App\Http\Requests\UpdateItemReqeust;
 use App\Models\Inventory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class InventoryController extends Controller
      */
     public function store(ItemRequest $request)
     {
-     Inventory::create($request->validated());
+        Inventory::create($request->validated());
         toast('Item added successfully', 'success');
         return redirect()->route('inventory.index');
     }
@@ -77,7 +78,7 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemRequest $request, Inventory $inventory)
+    public function update(UpdateItemReqeust $request, Inventory $inventory)
     {
         $inventory->update($request->validated());
         toast('Item updated successfully', 'success');

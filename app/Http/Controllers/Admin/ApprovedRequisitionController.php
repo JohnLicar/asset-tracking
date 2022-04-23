@@ -55,7 +55,8 @@ class ApprovedRequisitionController extends Controller
     {
 
         $requisition->update([
-            'status' => Requisition::STATUS_TO_ISSUED
+            'status' => Requisition::STATUS_TO_ISSUED,
+            'issued_date' => now(),
         ]);
         toast('Item issued successfully', 'success');
         return redirect()->route('approved-requisition.index');

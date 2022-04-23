@@ -60,15 +60,15 @@
                             </td>
 
                             <td class="px-4 py-3 text-sm">
-                                @if($item->status === 1 )
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-500 text-white">
-                                    Available
-                                </span>
-                                @elseif ($item->status === 2 )
+                                @if($item->quantity == 0 )
                                 <span
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-500 text-white">
                                     Not Available
+                                </span>
+                                @elseif ($item->status === 1 )
+                                <span
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-500 text-white">
+                                    Available
                                 </span>
                                 @elseif($item->status === 3)
                                 <span
@@ -80,11 +80,13 @@
 
 
                             <td class="flex  px-4 py-3 text-sm">
+                                @if ($item->quantity > 0 && $item->status != 3)
                                 <a href="{{ route('requisition.create', $item) }}"
                                     class="mt-2 mr-5 text-indigo-600 hover:text-indigo-900" title="Apply Requisition">
                                     <i class="gg-list"></i>
 
                                 </a>
+                                @endif
 
                             </td>
                         </tr>

@@ -27,6 +27,7 @@
                             <th class="px-4 py-3">Requested by</th>
                             <th class="px-4 py-3">Approved by</th>
                             <th class="px-4 py-3">Purpose</th>
+                            <th class="px-4 py-3 text-center">Date Issued</th>
                             <th class="px-4 py-3 text-center">Date Returned</th>
                         </tr>
                     </thead>
@@ -37,9 +38,9 @@
                             <td class="px-4 py-3 text-sm">
                                 @foreach ($item->request as $request)
                                 <ol class="list-decimal">
-                                    <li>
-                                        {{ $request->quantity }}
-                                    </li>
+
+                                    {{ $request->quantity }}
+
                                 </ol>
                                 @endforeach
 
@@ -48,14 +49,12 @@
                             <td class="px-4 py-3 text-sm">
                                 @foreach ($item->request as $request)
                                 <ol class="list-decimal">
-                                    <li>
-                                        {{ $request->unit->unit }}
-                                    </li>
+
+                                    {{ $request->unit->unit }}
+
                                 </ol>
                                 @endforeach
                             </td>
-
-
 
 
                             <td class="px-4 py-3 text-sm">
@@ -76,6 +75,10 @@
 
                             <td class="px-4 py-3 text-sm">
                                 {{ $item->purpose }}
+                            </td>
+
+                            <td class="px-4 py-3 text-sm">
+                                {{ $item->issued_date?->toFormatedDate() }}
                             </td>
 
                             <td class="px-4 py-3 text-sm">
