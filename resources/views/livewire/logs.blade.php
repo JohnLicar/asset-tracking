@@ -5,7 +5,7 @@
 
     <div class=" bg-white rounded-lg shadow-xs">
         <div>
-            <h1 class="text-3xl mb-5">Returned Requisition Logs</h1>
+            <h1 class="text-3xl mb-5">Returned Requisition and Issued Logs</h1>
         </div>
         <div class=" flex justify-between space-x-4 mb-3">
 
@@ -82,7 +82,7 @@
                             </td>
 
                             <td class="px-4 py-3 text-sm">
-                                {{ $item->deleted_at->toFormatedDate() }}
+                                {{ $item->deleted_at?->toFormatedDate() }}
                             </td>
 
                             @endforeach

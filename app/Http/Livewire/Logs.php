@@ -16,7 +16,8 @@ class Logs extends Component
     {
         $requisitions = Requisition::search($this->search)
             ->with('request.unit', 'approved', 'requested')
-            ->onlyTrashed()
+            ->whereIn('status', [Requisition::STATUS_TO_ISSUED, Requisition::STATUS_TO_RETURN])
+            ->withTrashed()
             ->paginate(6);
 
         $userlogs = UserLog::search($this->userlogsearch)
