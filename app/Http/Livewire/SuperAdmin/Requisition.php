@@ -15,11 +15,18 @@ class Requisition extends Component
     public function render()
     {
 
+        // $requisitions = ModelsRequisition::search($this->search, $this->status)
+        //     ->with('request.unit')
+        //     ->orderBy('status')
+        //     ->paginate(6);
+
+
         $requisitions = ModelsRequisition::search($this->search, $this->status)
-            ->with('request.unit')
+            ->with(['distinctnotcumable', 'requested', 'approved'])
             ->orderBy('status')
             ->paginate(6);
-
+        //
+        // dd($requisitions);
         return view('livewire.super-admin.requisition', ['requisitions' =>  $requisitions]);
     }
 }

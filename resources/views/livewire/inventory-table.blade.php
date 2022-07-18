@@ -85,6 +85,11 @@
 
 
                             <td class="flex  px-4 py-3 text-sm">
+                                <a href="{{ route('inventory.show', $item) }}"
+                                    class="mt-2 mr-5 text-green-600 hover:text-indigo-900">
+                                    <i class="gg-eye"></i>
+
+                                </a>
                                 <a href="{{ route('inventory.edit', $item) }}"
                                     class="mt-2 mr-5 text-indigo-600 hover:text-indigo-900">
                                     <i class="gg-pen"></i>

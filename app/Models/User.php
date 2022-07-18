@@ -67,6 +67,37 @@ class User extends Authenticatable
     }
 
 
+    public function request()
+    {
+        return $this->hasMany(Requisition::class, 'requested_by')->withTrashed();
+    }
+    public function pending()
+    {
+        return $this->hasMany(Requisition::class, 'requested_by')->where('status', 1);
+    }
+
+    public function approve()
+    {
+        return $this->hasMany(Requisition::class, 'requested_by')->where('status', 2);
+    }
+
+
+    public function decline()
+    {
+        return $this->hasMany(Requisition::class, 'requested_by')->where('status', 3);
+    }
+
+    public function returned()
+    {
+        return $this->hasMany(Requisition::class, 'requested_by')->where('status', 4);
+    }
+
+    public function issued()
+    {
+        return $this->hasMany(Requisition::class, 'requested_by')->where('status', 5);
+    }
+
+
     public static function search($search)
     {
         return empty($search) ? static::query()

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RequestisitonRequest;
 use App\Models\Inventory;
+use App\Models\QrCode;
 use App\Models\RequisitionItem;
 
 class RequisitionController extends Controller
@@ -18,6 +19,7 @@ class RequisitionController extends Controller
      */
     public function index()
     {
+
         return view('superadmin.requisitions.index');
     }
 
@@ -53,6 +55,7 @@ class RequisitionController extends Controller
      */
     public function store(RequestisitonRequest $request)
     {
+
         $request_id =  Requisition::create($request->all());
         foreach ($request->items as $item) {
             RequisitionItem::create([
@@ -107,9 +110,14 @@ class RequisitionController extends Controller
      */
     public function destroy(Requisition $requisition)
     {
+
         $items = RequisitionItem::with('requester', 'unit', 'requesition.approved')->inventory($requisition->id)
             ->whereRelation('unit', 'isConsumable', 0)
             ->get();
+
+        foreach ($items as $item) {
+            QrCode::where('id', $item->qr_code_id)->update(['status' => 0]);
+        }
 
         foreach ($items as $item) {
             $item->unit->update([

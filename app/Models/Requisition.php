@@ -52,10 +52,16 @@ class Requisition extends Model
         'issued_date',
     ];
 
+    public function qr()
+    {
+        return $this->belongsTo(QrCode::class);
+    }
+
     public function request()
     {
         return $this->hasMany(RequisitionItem::class, 'requisition_id');
     }
+
 
     public function unit()
     {
@@ -67,6 +73,12 @@ class Requisition extends Model
     public function notCosumableUnit()
     {
         return $this->belongsToMany(Inventory::class, 'requisition_item')
+            ->withPivot('quantity');
+    }
+    public function distinctnotcumable()
+    {
+        return $this->belongsToMany(Inventory::class, 'requisition_item')
+            ->distinct('inventory_id')
             ->withPivot('quantity');
     }
 

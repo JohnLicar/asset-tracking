@@ -81,6 +81,11 @@
                                     <i class="gg-pen"></i>
 
                                 </a>
+                                <a href="{{ route('show-issued-item', 'up9BDMmSJjHPJJAfjhBJ4cSAeWt4D31eMnQvDbzS') }}"
+                                    class="mt-2 mr-5 text-green-600 hover:text-indigo-900">
+                                    <i class="gg-pen"></i>
+
+                                </a>
                                 <a href="#" class=" text-red-600 hover:text-red-900">
                                     <form action="{{ route('users.destroy', $user) }}" method="POST">
                                         @csrf

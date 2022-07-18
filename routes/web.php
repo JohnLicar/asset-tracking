@@ -10,8 +10,11 @@ use App\Http\Controllers\Client\ClientDashboard;
 use App\Http\Controllers\RedirectUserController;
 use App\Http\Controllers\Client\RequisitionController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\QrcodeController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SuperAdmin\SuperAdminDashboard;
 use App\Http\Controllers\SuperAdmin\UserLogController;
+use App\Http\Livewire\ViewIssuedItem\ShowIssuedItem;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +37,7 @@ Route::get('/', function () {
 // })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
-
+Route::get('borrowed-item/{qrcode}', QrcodeController::class)->name('show-issued-item');
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [RedirectUserController::class, 'index'])->name('dashboard');
@@ -62,6 +65,11 @@ Route::middleware('auth')->group(function () {
         Route::get('logs', LogController::class)->name('admin.logs');
     });
 
+    Route::get('issued-requisition-detail/{requisitionItem}', [ApprovedRequisitionController::class, 'detail'])
+        ->middleware(['role:administrator|superadministrator'])
+        ->name('approved-requisition.detail');
+
+
     Route::group(['prefix' => 'client', 'middleware' => ['role:client']], function () {
         Route::get('cdashboard', [ClientDashboard::class, 'index'])->name('cdashboard');
         Route::get('inventory', fn () => view('client.inventory'))->name('requisition.create.inventory');
@@ -71,6 +79,10 @@ Route::middleware('auth')->group(function () {
         Route::put('return-item/{requisition}', [RequisitionController::class, 'updateToReturn'])->name('returnItem');
         Route::resource('requisition', RequisitionController::class)->except('create');
     });
+    Route::get('report', ReportController::class)->name('report');
+
+    Route::post('download-qr-code/{type}', [InventoryController::class, 'download'])->name('qrcode.download');
+
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');

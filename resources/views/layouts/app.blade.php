@@ -8,9 +8,20 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+    <!-- Chart -->
+    <script src="{{ @asset('vendor/larapex-charts/apexcharts.js') }}"></script>
 
     <!-- Icons -->
     <link href='https://css.gg/css' rel='stylesheet'>
@@ -37,7 +48,7 @@
         <div class="flex flex-col flex-1 w-full">
             @include('layouts.top-menu')
             <main class="h-full overflow-y-auto">
-                <div class="container px-6 mx-auto grid">
+                <div class="container grid px-6 mx-auto">
                     <h2 class="my-3 text-2xl font-semibold text-gray-700">
                         {{ $header }}
                     </h2>

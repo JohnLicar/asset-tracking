@@ -14,7 +14,8 @@ class RequisitionItem extends Model
     protected $fillable = [
         'requisition_id',
         'inventory_id',
-        'quantity'
+        'quantity',
+        'qr_code_id'
     ];
 
     protected $table = 'requisition_item';
@@ -44,6 +45,13 @@ class RequisitionItem extends Model
     {
         return $this->belongsTo(Inventory::class, 'inventory_id');
     }
+
+
+    public function qr_code()
+    {
+        return $this->belongsTo(QrCode::class, 'qr_code_id');
+    }
+
 
     public function scopeInventory($query, $item)
     {

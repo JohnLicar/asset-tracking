@@ -20,7 +20,7 @@ class BorrowedItemController extends Controller
         // ->where('status', 2)
         // ->paginate(10);
 
-        $requisitions = Requisition::with(['notCosumableUnit', 'requested', 'approved'])
+        $requisitions = Requisition::with(['distinctnotcumable', 'requested', 'approved'])
             ->where('status', 5)
 
             ->paginate(10);

@@ -14,9 +14,10 @@ class ApprovedReturn extends Component
     public function render()
     {
         $requisitions = Requisition::search($this->search)
-            ->with('request.unit', 'approved', 'requested')
+            ->with('distinctnotcumable', 'approved', 'requested')
             ->where('status', Requisition::STATUS_TO_RETURN)
             ->paginate(6);
+
 
         return view('livewire.admin.approved-return', compact('requisitions'));
     }

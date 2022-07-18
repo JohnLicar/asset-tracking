@@ -10,10 +10,10 @@ class ApprovedRequisition extends Component
     public function render()
     {
 
-        $requisitions = Requisition::with('request.unit', 'approved', 'requested')
+        $requisitions = Requisition::with('request.unit', 'approved', 'requested', 'qr')
             ->where('status', 2)
             ->paginate(6);
-
+        // dd($requisitions);
         return view('livewire.admin.approved-requisition', compact('requisitions'));
     }
 }
