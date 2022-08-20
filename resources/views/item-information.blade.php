@@ -1,18 +1,19 @@
-<x-guest-layout>
+<x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Approved Requisition') }}
+            {{ __('Item Informaion') }}
         </h2>
     </x-slot>
 
     <div class="py-6">
         <div class="mx-auto ">
-            <div class="overflow-x-auto bg-white shadow-sm sm:rounded-lg">
+            <div class="flex items-center justify-center overflow-x-auto bg-white shadow-sm sm:rounded-lg">
 
-                <div class="p-3 bg-white border-b border-gray-200">
+                <div
+                    class="flex flex-col w-full gap-5 p-3 bg-white border-b border-gray-200 md:justify-center md:items-center md:w-1/2 lg:w-1/2 sm:w-full">
 
                     <!-- component -->
-                    <div class="container w-full h-full mx-auto">
+                    {{-- <div class="container w-full h-full mx-auto">
                         <div class="relative h-full p-10 overflow-hidden wrap">
                             <div class="absolute h-full border border-gray-700 border-2-2 border-opacity-20"
                                 style="left: 50%"></div>
@@ -22,9 +23,9 @@
                                 <div class="z-20 flex items-center order-1 w-8 h-8 bg-gray-800 rounded-full shadow-xl">
                                     <h1 class="mx-auto text-lg font-semibold text-white">1</h1>
                                 </div>
-                                <div class="order-1 w-5/12 px-6 py-4 bg-gray-400 rounded-lg shadow-xl">
+                                <div class="order-1 w-5/12 px-6 py-4 bg-blue-400 rounded-lg shadow-xl">
                                     <h3 class="mb-3 text-xl font-bold text-gray-800">Item Name</h3>
-                                    <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">{{
+                                    <p class="text-gray-900 text-md">{{
                                         $qr->unit->unit }}</p>
                                 </div>
                             </div>
@@ -74,10 +75,35 @@
                                 </div>
                             </div>
                         </div>
+                    </div> --}}
+
+                    <div class="order-1 w-full px-6 py-4 bg-blue-400 rounded-lg shadow-xl">
+                        <h3 class="mb-3 text-xl font-bold text-gray-800">Item Name</h3>
+                        <p class="text-gray-900 text-md">{{
+                            $qr->unit->unit }}</p>
+                    </div>
+                    <div class="order-1 w-full px-6 py-4 bg-blue-400 rounded-lg shadow-xl">
+                        <h3 class="mb-3 text-xl font-bold text-gray-800">Borrower</h3>
+                        <p class="text-sm font-medium leading-snug tracking-wide text-gray-800 text-opacity-100">
+                            {{ $qr->requesition->count() > 0 ?
+                            $qr->requesition[0]->requested->full_name : 'Not Borrowed'
+                            }}</p>
+                    </div>
+                    <div class="order-1 w-full px-6 py-4 bg-blue-400 rounded-lg shadow-xl">
+                        <h3 class="mb-3 text-xl font-bold text-gray-800">Item Description</h3>
+                        <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">Lorem
+                            {{ $qr->unit->description }}</p>
+                    </div>
+                    <div class="order-1 w-full px-6 py-4 bg-blue-400 rounded-lg shadow-xl">
+                        <h3 class="mb-3 text-xl font-bold text-gray-800">Purpose</h3>
+                        <p class="text-sm font-medium leading-snug tracking-wide text-gray-800 text-opacity-100">
+                            {{ $qr->requesition->count() > 0 ?
+                            $qr->requesition[0]->purpose : 'Not Borrowed'
+                            }}</p>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
-</x-guest-layout>
+</x-app-layout>

@@ -305,9 +305,7 @@
                 </x-nav-link>
             </li>
 
-
             @endrole
-
 
         </ul>
     </div>

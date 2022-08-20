@@ -43,7 +43,7 @@
         @include('layouts.navigation')
         <!-- Mobile sidebar -->
         <!-- Backdrop -->
-        @include('layouts.navigation-mobile')
+        {{-- @include('layouts.navigation-mobile') --}}
 
         <div class="flex flex-col flex-1 w-full">
             @include('layouts.top-menu')

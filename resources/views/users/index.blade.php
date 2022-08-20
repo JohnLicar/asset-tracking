@@ -8,18 +8,18 @@
         <div class="my-3">
             <a href="{{ route('users.create') }}">
                 <x-button class="flex">
-                    <i class="gg-add-r mr-2"></i>
+                    <i class="mr-2 gg-add-r"></i>
                     {{ __('Create User') }}
                 </x-button>
             </a>
         </div>
 
-        <div class="overflow-hidden mb-8 w-full rounded-lg border shadow-xs">
-            <div class="overflow-x-auto w-full">
+        <div class="w-full mb-8 overflow-hidden border rounded-lg shadow-xs">
+            <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr
-                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
+                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Contact Number</th>
                             <th class="px-4 py-3">Position</th>
@@ -32,13 +32,13 @@
                         <tr class="text-gray-700">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-10 w-10">
+                                    <div class="flex-shrink-0 w-10 h-10">
                                         @if ($user->avatar)
                                         <img src="{{asset('images/profile/'.$user->avatar)}}" alt="User Picture"
-                                            class="h-10 w-10 rounded-full">
+                                            class="w-10 h-10 rounded-full">
                                         @else
                                         <img src="https://ui-avatars.com/api/?name={{ $user->full_name }}"
-                                            class="mx-2 h-10 w-10 rounded-full" />
+                                            class="w-10 h-10 mx-2 rounded-full" />
                                         @endif
                                     </div>
                                     <div class="ml-4">
@@ -64,29 +64,30 @@
                             <td class="px-4 py-3 text-sm">
                                 @if($user->roles[0]?->display_name == 'Administrator')
                                 <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-500 text-white">
+                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-white bg-green-500 rounded-full">
                                     {{ $user->roles[0]?->display_name }}
                                 </span>
                                 @else
                                 <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-500 text-white">
+                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-white bg-yellow-500 rounded-full">
                                     {{ $user->roles[0]?->display_name }}
                                 </span>
                                 @endif
                             </td>
 
-                            <td class="flex  px-4 py-3 text-sm">
+                            <td class="flex px-4 py-3 text-sm">
                                 <a href="{{ route('users.edit', $user->id) }}"
                                     class="mt-2 mr-5 text-indigo-600 hover:text-indigo-900">
                                     <i class="gg-pen"></i>
 
                                 </a>
-                                <a href="{{ route('show-issued-item', 'up9BDMmSJjHPJJAfjhBJ4cSAeWt4D31eMnQvDbzS') }}"
+                                {{-- <a
+                                    href="{{ route('show-issued-item', 'up9BDMmSJjHPJJAfjhBJ4cSAeWt4D31eMnQvDbzS') }}"
                                     class="mt-2 mr-5 text-green-600 hover:text-indigo-900">
                                     <i class="gg-pen"></i>
 
-                                </a>
-                                <a href="#" class=" text-red-600 hover:text-red-900">
+                                </a> --}}
+                                <a href="#" class="text-red-600  hover:text-red-900">
                                     <form action="{{ route('users.destroy', $user) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -102,7 +103,7 @@
                 </table>
             </div>
             <div
-                class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
+                class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t bg-gray-50 sm:grid-cols-9">
                 {{ $users->links() }}
             </div>
         </div>

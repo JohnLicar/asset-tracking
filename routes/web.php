@@ -37,7 +37,6 @@ Route::get('/', function () {
 // })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
-Route::get('borrowed-item/{qrcode}', QrcodeController::class)->name('show-issued-item');
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [RedirectUserController::class, 'index'])->name('dashboard');
@@ -82,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::get('report', ReportController::class)->name('report');
 
     Route::post('download-qr-code/{type}', [InventoryController::class, 'download'])->name('qrcode.download');
+    Route::get('borrowed-item/{qrcode}', QrcodeController::class)->name('show-issued-item');
 
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');

@@ -20,7 +20,7 @@ class QrcodeController extends Controller
             'requesition',
             'requesition.requested',
         )->where('qr_code', $qrcode)->first();
-        dd($qr);
+
         return view('item-information', compact('qr'));
     }
 }

@@ -69,7 +69,7 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Inventory $inventory)
+    public function show(Request $request, Inventory $inventory)
     {
         $inventory->load(
             // 'requesistion_item.unit',
@@ -81,7 +81,8 @@ class InventoryController extends Controller
 
         );
         // dd($inventory);
-        return view('admin.inventory.show', compact('inventory'));
+        $ip = $request->ip();
+        return view('admin.inventory.show', compact('inventory', 'ip'));
     }
 
     /**

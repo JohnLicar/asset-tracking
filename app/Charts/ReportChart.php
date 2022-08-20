@@ -43,7 +43,6 @@ class ReportChart
 
         return $this->chart->barChart()
             ->setTitle('Client with most request')
-            ->setSubtitle('Wins during season 2021.')
             ->addData('', $reports->pluck('request_count')->all())
             ->setXAxis($reports->pluck('full_name')->all());
     }

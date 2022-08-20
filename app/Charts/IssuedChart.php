@@ -39,7 +39,6 @@ class IssuedChart
 
         return $this->chart->barChart()
             ->setTitle('Client with most Issued item')
-            ->setSubtitle('Wins during season 2021.')
             ->addData('', $reports->pluck('issued_count')->all())
             ->setColors(['#00E396'])
             ->setXAxis($reports->pluck('full_name')->all());

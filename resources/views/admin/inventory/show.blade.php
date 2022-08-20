@@ -36,7 +36,7 @@
 
                                 <td class="px-4 py-3 text-sm ">
 
-                                    {!! QrCode::generate('192.168.1.5:8000/borrowed-item/' . $item->qr_code); !!}
+                                    {!! QrCode::generate( $ip.':8000/borrowed-item/' . $item->qr_code); !!}
                                     {{-- <img src="data:image/png;base64, {!!
                                     base64_encode(QrCode::format('png')
                                     ->size(100)
